@@ -53,13 +53,13 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
         run_dir = os.path.join(RESULTS_DIR, file_label, 'zero_shot', f'run_{run_num}')
         os.makedirs(run_dir, exist_ok=True)
         print(f'\n --- ZERO-SHOT | Run {run_num}/{NUM_RUNS} ---')
-        
+
         run_start = time.time()
         all_category_results = {}
-        
+
         for cat_name, cat_credits in categories.items():
             print(f'   Category: {cat_name} ({len(cat_credits)} credits)...', end=' ')
-            
+
             cat_json = json.dumps(cat_credits, indent=2, default=str)
             user_msg = f"""## Envision Reference Data — {cat_name} Category
 {cat_json}
@@ -68,17 +68,16 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
 {pdf_json}
 
 Task: Evaluate this project against all {cat_name} credits shown above. For each credit, determine applicability, evaluate questions against the PDF metadata, determine the achievable level, calculate points, and identify documentation gaps. Return your assessment as JSON following the credit_assessments format in your system instructions."""
-            
-            # TIMEOUT
-            result = call_ollama(system_prompt, user_msg, timeout=7200) 
-            
+
+            result = call_ollama(system_prompt, user_msg, timeout=7200)
+
             cat_safe = cat_name.replace(' ', '_').lower()
             save_result(result, os.path.join(run_dir, f'{cat_safe}.json'))
             all_category_results[cat_name] = result
-            
+
             status = '✅' if result['success'] else '❌'
             print(f'{status} ({result["elapsed_seconds"]}s)')
-            
+
         run_elapsed = round(time.time() - run_start, 2)
         summary = {
             'experiment': 'zero_shot', 'file': file_label, 'run': run_num,
@@ -95,7 +94,8 @@ Task: Evaluate this project against all {cat_name} credits shown above. For each
             'timestamp': timestamp()
         }
         save_result(summary, os.path.join(run_dir, '_summary.json'))
-        timing_log.append({'experiment': 'zero_shot', 'file': file_label, 'run': run_num, 'seconds': run_elapsed})
+        timing_log.append({'experiment': 'zero_shot', 'file': file_label,
+                           'run': run_num, 'seconds': run_elapsed})
 
     # =====================================================
     # EXPERIMENT B: RAG
@@ -104,41 +104,55 @@ Task: Evaluate this project against all {cat_name} credits shown above. For each
         run_dir = os.path.join(RESULTS_DIR, file_label, 'rag', f'run_{run_num}')
         os.makedirs(run_dir, exist_ok=True)
         print(f'\n --- RAG | Run {run_num}/{NUM_RUNS} ---')
-        
+
         run_start = time.time()
         all_category_results = {}
-        
+
         for cat_name in category_names:
             n_credits = len(categories[cat_name])
             print(f'   Category: {cat_name} ({n_credits} credits)...', end=' ')
-            
-            query_text = f"""Evaluate this infrastructure project against all Envision credits in the {cat_name} category. 
-Project PDF Metadata: {pdf_json} 
+
+            query_text = f"""Evaluate this infrastructure project against all Envision credits in the {cat_name} category.
+Project PDF Metadata: {pdf_json}
 For each credit in {cat_name}, determine applicability, evaluate questions, determine the achievable level, calculate points, and identify documentation gaps. Return JSON following the credit_assessments format."""
-            
+
             rag_start = time.time()
             try:
                 rag_response = rag_query_engine.query(query_text)
-                rag_elapsed = round(time.time() - rag_start, 2)
-                
+                rag_elapsed  = round(time.time() - rag_start, 2)
+
                 sources = []
                 if hasattr(rag_response, 'source_nodes'):
                     for node in rag_response.source_nodes:
+                        source_type = node.metadata.get('source_type', 'unknown')
+                        if source_type == 'envision_workbook':
+                            source_id = node.metadata.get('credit_id', '?')
+                            location  = node.metadata.get('category', '?')
+                        else:
+                            # guidance_manual chunk
+                            source_id = f"p{node.metadata.get('page_approx', '?')}"
+                            location  = node.metadata.get('source_file', '?')
                         sources.append({
-                            'credit_id': node.metadata.get('credit_id', '?'),
+                            'source_type': source_type,
+                            'source_id':   source_id,
+                            'location':    location,
                             'score': round(node.score, 4) if node.score else None,
-                            'category': node.metadata.get('category', '?'),
                         })
-                        
+
+                n_workbook_hits = sum(1 for s in sources if s['source_type'] == 'envision_workbook')
+                n_manual_hits   = sum(1 for s in sources if s['source_type'] == 'guidance_manual')
+
                 result = {
                     'response': str(rag_response),
                     'elapsed_seconds': rag_elapsed,
                     'retrieved_sources': sources,
                     'num_sources': len(sources),
+                    'num_workbook_hits': n_workbook_hits,
+                    'num_manual_hits': n_manual_hits,
                     'success': True
                 }
                 status = '✅'
-                
+
             except Exception as e:
                 rag_elapsed = round(time.time() - rag_start, 2)
                 result = {
@@ -146,33 +160,44 @@ For each credit in {cat_name}, determine applicability, evaluate questions, dete
                     'elapsed_seconds': rag_elapsed,
                     'retrieved_sources': [],
                     'num_sources': 0,
+                    'num_workbook_hits': 0,
+                    'num_manual_hits': 0,
                     'success': False
                 }
                 status = '❌'
-                
+
             cat_safe = cat_name.replace(' ', '_').lower()
             save_result(result, os.path.join(run_dir, f'{cat_safe}.json'))
             all_category_results[cat_name] = result
-            
-            print(f'{status} ({result["elapsed_seconds"]}s, {result["num_sources"]} sources)')
-            
+
+            print(
+                f'{status} ({result["elapsed_seconds"]}s, '
+                f'{result["num_sources"]} sources: '
+                f'{result["num_workbook_hits"]} workbook + '
+                f'{result["num_manual_hits"]} manual)'
+            )
+
         run_elapsed = round(time.time() - run_start, 2)
         summary = {
             'experiment': 'rag', 'file': file_label, 'run': run_num,
             'model': MODEL_NAME, 'temperature': TEMPERATURE,
             'retrieval_top_k': RETRIEVAL_TOP_K, 'embedding_model': EMBEDDING_MODEL,
+            'index_sources': ['envision_workbook', 'guidance_manual'],
             'total_elapsed_seconds': run_elapsed,
             'categories': {
                 k: {
                     'elapsed_seconds': v['elapsed_seconds'],
                     'num_sources': v['num_sources'],
+                    'num_workbook_hits': v['num_workbook_hits'],
+                    'num_manual_hits': v['num_manual_hits'],
                     'success': v['success'],
                 } for k, v in all_category_results.items()
             },
             'timestamp': timestamp()
         }
         save_result(summary, os.path.join(run_dir, '_summary.json'))
-        timing_log.append({'experiment': 'rag', 'file': file_label, 'run': run_num, 'seconds': run_elapsed})
+        timing_log.append({'experiment': 'rag', 'file': file_label,
+                           'run': run_num, 'seconds': run_elapsed})
 
 # =========================================================
 # FINAL SUMMARY

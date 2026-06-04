@@ -7,7 +7,7 @@ import requests
 import pandas as pd
 import fitz  # PyMuPDF para ler PDFs
 
-# ---------- PDF EXTRACTION ----------
+# ---------- PDF EXTRACTION (project document) ----------
 def extract_pdf_metadata(filepath):
     """Extract all text from a PDF file using PyMuPDF."""
     text_content = ""
@@ -18,14 +18,58 @@ def extract_pdf_metadata(filepath):
         doc.close()
     except Exception as e:
         print(f"Erro ao ler o PDF {filepath}: {e}")
-        
+
     return {
         'source_file': os.path.basename(filepath),
         'extracted_text': text_content
     }
 
+# ---------- PDF CHUNKING (for RAG indexing) ----------
+def chunk_pdf_for_rag(filepath, chunk_size=1500, overlap=200):
+    """Extract and chunk a PDF into overlapping text segments for RAG indexing.
+
+    Returns a list of dicts with keys: text, chunk_idx, source_file, page_approx.
+    chunk_size and overlap are measured in characters.
+    """
+    chunks = []
+    try:
+        doc = fitz.open(filepath)
+        # Build a single text string and track where each page starts
+        full_text = ""
+        page_offsets = [0]  # page_offsets[i] = char offset of page i start
+        for page in doc:
+            full_text += page.get_text("text") + "\n"
+            page_offsets.append(len(full_text))
+        doc.close()
+
+        start = 0
+        chunk_idx = 0
+        while start < len(full_text):
+            end = min(start + chunk_size, len(full_text))
+            chunk_text = full_text[start:end].strip()
+            if chunk_text:
+                # Approximate page: last page that started at or before `start`
+                page_num = next(
+                    (i for i in range(len(page_offsets) - 1, -1, -1)
+                     if page_offsets[i] <= start),
+                    0
+                ) + 1  # 1-indexed
+                chunks.append({
+                    'text': chunk_text,
+                    'chunk_idx': chunk_idx,
+                    'source_file': os.path.basename(filepath),
+                    'page_approx': page_num,
+                })
+                chunk_idx += 1
+            start += chunk_size - overlap
+
+    except Exception as e:
+        print(f"Error chunking PDF {filepath}: {e}")
+
+    return chunks
+
 # ---------- OLLAMA API ----------
-def call_ollama(system_prompt, user_message, timeout=7200): # Timeout, safe!
+def call_ollama(system_prompt, user_message, timeout=7200):  # Timeout, safe!
     """Sends the prompt to the Ollama API and returns the response."""
     start = time.time()
     try:
@@ -42,7 +86,7 @@ def call_ollama(system_prompt, user_message, timeout=7200): # Timeout, safe!
                     'num_predict': MAX_OUTPUT_TOKENS,
                 }
             },
-            timeout=timeout 
+            timeout=timeout
         )
         elapsed = time.time() - start
         result = r.json()
