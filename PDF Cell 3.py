@@ -2,138 +2,197 @@
 # CELL 3: BUILD RAG INDEX
 # =============================================================
 # Sources indexed:
-#   1. envision_index.json  — workbook (scoring state, questions, rubrics)
-#   2. ISI Envision Manual  — guidance PDF (intent, applicability, criteria text)
+#   1. envision_index.json — workbook (scoring state, questions, rubrics)
+#   2. ISI Envision Manual — guidance PDF (intent, applicability, criteria text)
 # Both are stored in the same ChromaDB collection with a `source_type` field
 # so the retriever can transparently pull from either when answering a query.
 # =============================================================
+import os, json, hashlib
 
 import chromadb
-import llama_index.core
-from llama_index.core import Document, VectorStoreIndex, StorageContext
+from llama_index.core import (
+    Document, VectorStoreIndex, StorageContext, Settings,
+)
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings
 
 Settings.llm = Ollama(
     model=MODEL_NAME,
-    request_timeout=7200,
-    temperature=TEMPERATURE
+    request_timeout=OLLAMA_TIMEOUT,
+    temperature=TEMPERATURE,
 )
-Settings.embed_model = HuggingFaceEmbedding(
-    model_name=EMBEDDING_MODEL
-)
+Settings.embed_model = HuggingFaceEmbedding(model_name=EMBEDDING_MODEL)
 
-print('Building the vector index from envision_index.json AND user guide PDF...')
+COLLECTION_NAME = "envision_credits"
+FINGERPRINT_PATH = os.path.join(CHROMA_DB_PATH, "_fingerprint.json")
 
-documents = []
 
 # ------------------------------------------------------------------
-# SOURCE 1 — Envision workbook (JSON)
-# Covers: credit IDs, scoring rubrics, questions, lookup thresholds,
-#         applicability answers, and tabulation data.
+# FIX: the per-credit text was built with raw f-strings using credit['key'],
+#      which raises KeyError the moment the JSON schema changes. Isolated into a
+#      function with safe .get() access so a missing field degrades gracefully
+#      instead of crashing the whole index build.
 # ------------------------------------------------------------------
-with open(ENVISION_INDEX_PATH) as f:
-    envision_raw = json.load(f)
+def format_credit_text(credit):
+    text = (
+        f"Credit: {credit.get('credit_id', '?')} - {credit.get('credit_name', '?')}\n"
+        f"Category: {credit.get('sheet', '?')} / {credit.get('category', '?')}\n"
+        f"Points: {credit.get('points_display', '?')}\n"
+        f"{credit.get('intent', '')}\n"
+        f"{credit.get('metric', '')}\n"
+        f"{credit.get('applicability_description', '')}\n"
+        "Questions:"
+    )
+    for q in credit.get("questions", []):
+        text += f"\n  {q.get('letter', '?')}: {q.get('text', '')}"
 
-for credit_id, credit in envision_raw['credits'].items():
-    text = f"""Credit: {credit['credit_id']} - {credit['credit_name']}
-Category: {credit['sheet']} / {credit['category']}
-Points: {credit['points_display']}
-{credit['intent']}
-{credit['metric']}
-{credit['applicability_description']}
-Questions:"""
-    for q in credit.get('questions', []):
-        text += f"\n  {q['letter']}: {q['text']}"
+    if credit.get("lookup_criteria"):
+        text += "\n\nLookup Criteria:"
+        for lc in credit["lookup_criteria"]:
+            text += f"\n  {lc.get('criterion', '?')}: {lc.get('description', '')}"
 
-    if credit.get('lookup_criteria'):
-        text += '\n\nLookup Criteria:'
-        for lc in credit['lookup_criteria']:
-            text += f"\n  {lc['criterion']}: {lc['description']}"
-
-    tab = credit.get('tabulation', {})
+    tab = credit.get("tabulation", {})
     if tab:
-        text += '\n\nLevel Guides:'
-        for lvl in ['Improved', 'Enhanced', 'Superior', 'Conserving']:
-            g = tab.get(f'LevelGuide_{lvl}', '')
+        text += "\n\nLevel Guides:"
+        for lvl in ["Improved", "Enhanced", "Superior", "Conserving"]:
+            g = tab.get(f"LevelGuide_{lvl}", "")
             if g:
                 text += f"\n  {lvl}: {g}"
 
-    pts = credit.get('points', {})
+    pts = credit.get("points", {})
     if pts:
-        text += f"""\n\nPoints Rubric:
-No Level={pts.get('No_Level', 0)},
-Improved={pts.get('Improved', 0)},
-Enhanced={pts.get('Enhanced', 0)},
-Superior={pts.get('Superior', 0)},
-Conserving={pts.get('Conserving', 0)},
-Restorative={pts.get('Restorative', 'N/A')}"""
+        text += (
+            "\n\nPoints Rubric:"
+            f"\n  No Level={pts.get('No_Level', 0)},"
+            f"\n  Improved={pts.get('Improved', 0)},"
+            f"\n  Enhanced={pts.get('Enhanced', 0)},"
+            f"\n  Superior={pts.get('Superior', 0)},"
+            f"\n  Conserving={pts.get('Conserving', 0)},"
+            f"\n  Restorative={pts.get('Restorative', 'N/A')}"
+        )
+    return text
 
-    documents.append(Document(
-        text=text,
-        metadata={
-            'source_type': 'envision_workbook',
-            'credit_id': credit_id,
-            'credit_name': credit['credit_name'],
-            'category': credit['sheet'],
-            'subcategory': credit['category'],
-            'max_points': pts.get('Total', 0),
-            'has_lookup': bool(credit.get('lookup_criteria')),
-        }
-    ))
 
-n_workbook = len(documents)
-print(f'  ✅ Workbook: {n_workbook} credit documents from envision_index.json')
+def _source_fingerprint():
+    """Hash of the source files (size+mtime) + chunking/embedding params.
+
+    FIX: lets Cell 3 skip re-embedding when nothing relevant changed.
+    """
+    h = hashlib.sha256()
+    for p in [ENVISION_INDEX_PATH, USER_GUIDE_PDF_PATH]:
+        h.update(p.encode())
+        if os.path.exists(p):
+            st = os.stat(p)
+            h.update(f"{st.st_size}:{int(st.st_mtime)}".encode())
+    h.update(f"{EMBEDDING_MODEL}|{CHUNK_SIZE}|{CHUNK_OVERLAP}".encode())
+    return h.hexdigest()
+
+
+def _existing_fingerprint():
+    try:
+        with open(FINGERPRINT_PATH) as f:
+            return json.load(f).get("fingerprint")
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+
+def _build_documents():
+    documents = []
+
+    # --- SOURCE 1 — Envision workbook (JSON) ---
+    with open(ENVISION_INDEX_PATH) as f:
+        envision_raw = json.load(f)
+    for credit_id, credit in envision_raw["credits"].items():
+        pts = credit.get("points", {})
+        documents.append(Document(
+            text=format_credit_text(credit),
+            metadata={
+                "source_type": "envision_workbook",
+                "credit_id": credit_id,
+                "credit_name": credit.get("credit_name", "?"),
+                "category": credit.get("sheet", "?"),
+                "subcategory": credit.get("category", "?"),
+                "max_points": pts.get("Total", 0),
+                "has_lookup": bool(credit.get("lookup_criteria")),
+            },
+        ))
+    n_workbook = len(documents)
+    print(f"   ✅ Workbook: {n_workbook} credit documents from envision_index.json")
+
+    # --- SOURCE 2 — ISI Envision Guidance Manual (PDF) ---
+    print(f"   Chunking user guide: {os.path.basename(USER_GUIDE_PDF_PATH)} ...")
+    guide_chunks = chunk_pdf_for_rag(
+        USER_GUIDE_PDF_PATH, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP
+    )
+    for chunk in guide_chunks:
+        documents.append(Document(
+            text=chunk["text"],
+            metadata={
+                "source_type": "guidance_manual",
+                "source_file": chunk["source_file"],
+                "chunk_idx": chunk["chunk_idx"],
+                "page_approx": chunk["page_approx"],
+            },
+        ))
+    n_manual = len(guide_chunks)
+    print(f"   ✅ Manual: {n_manual} chunks from user guide PDF")
+    return documents, n_workbook, n_manual
+
 
 # ------------------------------------------------------------------
-# SOURCE 2 — ISI Envision Guidance Manual (PDF)
-# Covers: full credit descriptions, applicability statements,
-#         performance-improvement guidance, evaluation criteria text,
-#         documentation guidance, and related-credits sections.
-# These are the passages the system prompt (§2.1) requires for Phase 1
-# applicability checks and Phase 2 criteria evaluation.
+# Decide whether to rebuild or reuse the index.
+# FIX: the old code deleted + re-embedded the entire corpus on EVERY run.
+#      Now an unchanged corpus is reused, saving a lot of time/compute.
 # ------------------------------------------------------------------
-print(f'  Chunking user guide: {os.path.basename(USER_GUIDE_PDF_PATH)} ...')
-guide_chunks = chunk_pdf_for_rag(USER_GUIDE_PDF_PATH, chunk_size=1500, overlap=200)
-
-for chunk in guide_chunks:
-    documents.append(Document(
-        text=chunk['text'],
-        metadata={
-            'source_type': 'guidance_manual',
-            'source_file': chunk['source_file'],
-            'chunk_idx': chunk['chunk_idx'],
-            'page_approx': chunk['page_approx'],
-        }
-    ))
-
-n_manual = len(guide_chunks)
-print(f'  ✅ Manual: {n_manual} chunks from user guide PDF')
-print(f'  Total documents in index: {len(documents)}')
-
-# ------------------------------------------------------------------
-# Build ChromaDB vector index
-# ------------------------------------------------------------------
+fingerprint = _source_fingerprint()
 db_client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
 
-try:
-    db_client.delete_collection('envision_credits')
-except Exception:
-    pass
+reuse = False
+if REBUILD_INDEX == "never":
+    reuse = True
+elif REBUILD_INDEX == "auto":
+    reuse = (_existing_fingerprint() == fingerprint)
 
-chroma_collection = db_client.create_collection('envision_credits')
-vector_store      = ChromaVectorStore(chroma_collection=chroma_collection)
-storage_context   = StorageContext.from_defaults(vector_store=vector_store)
+rag_index = None
+if reuse:
+    try:
+        chroma_collection = db_client.get_collection(COLLECTION_NAME)
+        vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+        rag_index = VectorStoreIndex.from_vector_store(
+            vector_store, embed_model=Settings.embed_model
+        )
+        print(f"♻️  Reusing existing index ({chroma_collection.count()} vectors) "
+              f"— sources unchanged.")
+    except Exception as e:  # chromadb raises various types; treat any as "rebuild"
+        print(f"   (could not reuse existing index: {e}) — rebuilding.")
+        reuse = False
 
-rag_index = VectorStoreIndex.from_documents(
-    documents,
-    storage_context=storage_context,
-    embed_model=Settings.embed_model,
-    show_progress=True
-)
+if not reuse:
+    print("Building the vector index from envision_index.json AND user guide PDF...")
+    documents, n_workbook, n_manual = _build_documents()
+    print(f"   Total documents in index: {len(documents)}")
 
-print(f'\n✅ RAG index built with {len(documents)} total documents')
-print(f'   Workbook entries: {n_workbook} | Manual chunks: {n_manual}')
-print(f'   Saved to: {CHROMA_DB_PATH}')
+    try:
+        db_client.delete_collection(COLLECTION_NAME)
+    except Exception:
+        pass
+    chroma_collection = db_client.create_collection(COLLECTION_NAME)
+    vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    rag_index = VectorStoreIndex.from_documents(
+        documents,
+        storage_context=storage_context,
+        embed_model=Settings.embed_model,
+        show_progress=True,
+    )
+
+    os.makedirs(CHROMA_DB_PATH, exist_ok=True)
+    with open(FINGERPRINT_PATH, "w") as f:
+        json.dump({"fingerprint": fingerprint,
+                   "n_workbook": n_workbook,
+                   "n_manual": n_manual}, f)
+
+    print(f"\n✅ RAG index built with {len(documents)} total documents")
+    print(f"   Workbook entries: {n_workbook} | Manual chunks: {n_manual}")
+    print(f"   Saved to: {CHROMA_DB_PATH}")
