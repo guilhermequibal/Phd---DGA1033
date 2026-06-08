@@ -1,24 +1,43 @@
 # =============================================================
 # CELL 2: HELPER FUNCTIONS (PDFs)
+#
+# STRATEGY:
+# This cell defines all reusable utilities that the experiment cells
+# depend on. Three design principles guide every function here:
+#
+# 1. Explicit failure — functions return structured diagnostic fields
+#    (extraction_ok, error, n_chars) instead of silently swallowing
+#    exceptions. Downstream cells can detect and handle failures rather
+#    than unknowingly processing empty or corrupted data.
+#
+# 2. Embedding-aware chunking — the PDF chunker packs whole sentences
+#    into each chunk and sizes them to fit within the embedding model's
+#    token window. Naive character-slice chunking cuts sentences mid-word
+#    and can produce chunks that exceed the model's context, causing
+#    content to be silently discarded before embedding.
+#
+# 3. Resilient API calls — the Ollama wrapper retries with exponential
+#    backoff. Multi-hour experiments must tolerate transient server
+#    failures; a single hard crash would discard all prior results.
 # =============================================================
 import os
 import json, time, datetime, re
 import requests
 import pandas as pd
-import fitz  # PyMuPDF para ler PDFs
+import fitz  # PyMuPDF
 
 
 # ---------- JSON VALIDATION ----------
 def _looks_like_json(text):
-    """Best-effort check that the model output contains a parseable JSON object.
+    """Returns True if the model output contains a parseable JSON object.
 
-    FIX: lets callers know whether the model actually returned usable JSON.
-    HTTP success != valid output.
+    HTTP 200 does not guarantee that the model returned structured output;
+    this check lets callers flag and handle non-JSON responses explicitly.
     """
     if not text:
         return False
     s = text.strip()
-    # strip markdown code fences if present
+    # Strip markdown code fences if the model wrapped its output in them.
     s = re.sub(r"```(?:json)?", "", s).strip()
     start = s.find("{")
     end = s.rfind("}")
@@ -35,9 +54,8 @@ def _looks_like_json(text):
 def extract_pdf_metadata(filepath):
     """Extract all text from a PDF file using PyMuPDF.
 
-    FIX: returns explicit diagnostic fields (extraction_ok, n_pages, n_chars,
-    error) instead of silently swallowing exceptions and returning empty text.
-    Also flags empty extractions, which usually mean a scanned PDF that needs OCR.
+    Returns a dict with diagnostic fields (extraction_ok, n_pages, n_chars,
+    error) so the caller can detect failures and scanned PDFs that need OCR.
     """
     text_content = ""
     n_pages = 0
@@ -74,7 +92,7 @@ def _estimate_tokens(text, chars_per_token=4):
 
 
 def _split_sentences(text):
-    """Lightweight sentence splitter (keeps it dependency-free)."""
+    """Lightweight sentence splitter (no external dependencies)."""
     parts = re.split(r"(?<=[.!?])\s+", text)
     return [p for p in parts if p.strip()]
 
@@ -82,22 +100,22 @@ def _split_sentences(text):
 def chunk_pdf_for_rag(filepath, chunk_size=850, overlap=150, chars_per_token=4):
     """Extract and chunk a PDF into overlapping segments for RAG indexing.
 
-    FIX: the old version sliced blindly every `chunk_size` characters, which
-    (a) cut words/sentences in half and (b) produced chunks LARGER than the
-    embedding model's token window, so part of every chunk was truncated and
-    never embedded. This version:
-      * packs whole sentences into each chunk,
-      * keeps each chunk under `chunk_size` chars (sized in Cell 1 to fit the
-        embedding token limit, so nothing is silently truncated),
-      * carries a sentence-level overlap for context continuity,
-      * tracks the approximate source page for citations.
-    Returns dicts with: text, chunk_idx, source_file, page_approx, n_tokens_est.
+    Chunks are built from whole sentences and sized to stay within chunk_size
+    characters, which is derived in Cell 1 to fit the embedding model's token
+    limit. This prevents any chunk from being silently truncated at embedding
+    time, which would cause part of its content to never be retrievable.
+
+    A sentence-level overlap between consecutive chunks preserves context
+    continuity at chunk boundaries. Each chunk also records an approximate
+    source page number for citation purposes.
+
+    Returns a list of dicts: text, chunk_idx, source_file, page_approx, n_tokens_est.
     """
     chunks = []
     try:
         doc = fitz.open(filepath)
         page_texts = []
-        page_offsets = [0]  # page_offsets[i] = char offset where page i starts
+        page_offsets = [0]  # cumulative char offset at the start of each page
         for page in doc:
             t = page.get_text("text") + "\n"
             page_texts.append(t)
@@ -109,13 +127,13 @@ def chunk_pdf_for_rag(filepath, chunk_size=850, overlap=150, chars_per_token=4):
         return chunks
 
     def page_of(char_pos):
-        # last page that started at or before char_pos (1-indexed)
+        # Returns the 1-indexed page number that contains the given character position.
         for i in range(len(page_offsets) - 1, -1, -1):
             if page_offsets[i] <= char_pos:
                 return i + 1
         return 1
 
-    # Build sentence units, each carrying its character position in full_text.
+    # Build sentence units, each tagged with its character position in full_text.
     sentences = []
     cursor = 0
     for line in full_text.split("\n"):
@@ -140,7 +158,7 @@ def chunk_pdf_for_rag(filepath, chunk_size=850, overlap=150, chars_per_token=4):
             buf.append(sentences[j][0])
             buf_len += len(sentences[j][0]) + 1
             j += 1
-        if not buf:  # a single oversized sentence: hard-split it once
+        if not buf:  # single oversized sentence: hard-split once to make progress
             buf = [sentences[i][0][:chunk_size]]
             j = i + 1
         chunk_text = " ".join(buf).strip()
@@ -153,24 +171,24 @@ def chunk_pdf_for_rag(filepath, chunk_size=850, overlap=150, chars_per_token=4):
                 "n_tokens_est": _estimate_tokens(chunk_text, chars_per_token),
             })
             chunk_idx += 1
-        # step back a few sentences to create the overlap
+        # Step back a few sentences to create the overlap between consecutive chunks.
         overlap_chars, step_back, k = 0, 0, j - 1
         while k > i and overlap_chars < overlap:
             overlap_chars += len(sentences[k][0])
             step_back += 1
             k -= 1
-        i = max(i + 1, j - step_back)  # always make progress (guaranteed terminate)
+        i = max(i + 1, j - step_back)  # always advance to guarantee termination
 
     return chunks
 
 
 # ---------- OLLAMA API ----------
 def call_ollama(system_prompt, user_message, timeout=None, max_retries=None):
-    """Send the prompt to the Ollama API and return the response + metrics.
+    """Send a prompt to the Ollama API and return the response with metrics.
 
-    FIX: configurable (and shorter) timeout, automatic retries with exponential
-    backoff on transient failures, narrower exception handling, and a
-    `valid_json` flag so the caller knows whether the output is parseable.
+    Retries with exponential backoff on transient failures. Returns a dict
+    with a `valid_json` flag so callers can track structured output quality,
+    and `success` to distinguish API errors from model-level failures.
     """
     timeout = OLLAMA_TIMEOUT if timeout is None else timeout
     max_retries = OLLAMA_MAX_RETRIES if max_retries is None else max_retries
@@ -239,7 +257,7 @@ def load_envision_by_category():
 
 # ---------- RESULT SAVING ----------
 def save_result(result_dict, filepath):
-    """Save a dict as a JSON file (creates parent dirs)."""
+    """Save a dict as a JSON file (creates parent dirs if needed)."""
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w") as f:
         json.dump(result_dict, f, indent=2, default=str)

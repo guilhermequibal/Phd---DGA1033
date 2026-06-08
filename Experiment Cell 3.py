@@ -1,11 +1,23 @@
 # =============================================================
 # CELL 3: BUILD RAG INDEX
-# =============================================================
-# Sources indexed:
-#   1. envision_index.json — workbook (scoring state, questions, rubrics)
-#   2. ISI Envision Manual — guidance PDF (intent, applicability, criteria text)
-# Both are stored in the same ChromaDB collection with a `source_type` field
-# so the retriever can transparently pull from either when answering a query.
+#
+# STRATEGY:
+# This cell constructs the vector index that powers the RAG experimental
+# arm. Two complementary knowledge sources are indexed together:
+#
+#   1. envision_index.json — structured workbook data (credit IDs, scoring
+#      rubrics, applicability questions, level guides, point tables).
+#   2. ISI Envision Guidance Manual (PDF) — unstructured narrative text
+#      (design intent, applicability criteria, measurement guidance).
+#
+# Storing both in the same ChromaDB collection with a `source_type` field
+# lets the retriever draw relevant context from either source in a single
+# query, without the caller needing to manage two separate indexes.
+#
+# To avoid redundant computation on repeated runs, a SHA-256 fingerprint
+# of the source files and chunking/embedding parameters is compared
+# against the stored fingerprint before deciding whether to rebuild.
+# If nothing changed, the existing index is reused directly.
 # =============================================================
 import os, json, hashlib
 
@@ -28,13 +40,13 @@ COLLECTION_NAME = "envision_credits"
 FINGERPRINT_PATH = os.path.join(CHROMA_DB_PATH, "_fingerprint.json")
 
 
-# ------------------------------------------------------------------
-# FIX: the per-credit text was built with raw f-strings using credit['key'],
-#      which raises KeyError the moment the JSON schema changes. Isolated into a
-#      function with safe .get() access so a missing field degrades gracefully
-#      instead of crashing the whole index build.
-# ------------------------------------------------------------------
 def format_credit_text(credit):
+    """Serialize a credit entry to a plain-text document for embedding.
+
+    Uses .get() with fallbacks on every field so that a missing or renamed
+    key in the JSON schema degrades gracefully rather than raising a KeyError
+    that would abort the entire index build.
+    """
     text = (
         f"Credit: {credit.get('credit_id', '?')} - {credit.get('credit_name', '?')}\n"
         f"Category: {credit.get('sheet', '?')} / {credit.get('category', '?')}\n"
@@ -75,9 +87,10 @@ def format_credit_text(credit):
 
 
 def _source_fingerprint():
-    """Hash of the source files (size+mtime) + chunking/embedding params.
+    """Compute a hash over source file metadata and indexing parameters.
 
-    FIX: lets Cell 3 skip re-embedding when nothing relevant changed.
+    Any change to a source file or to EMBEDDING_MODEL, CHUNK_SIZE, or
+    CHUNK_OVERLAP invalidates this fingerprint and triggers a rebuild.
     """
     h = hashlib.sha256()
     for p in [ENVISION_INDEX_PATH, USER_GUIDE_PDF_PATH]:
@@ -141,9 +154,9 @@ def _build_documents():
 
 
 # ------------------------------------------------------------------
-# Decide whether to rebuild or reuse the index.
-# FIX: the old code deleted + re-embedded the entire corpus on EVERY run.
-#      Now an unchanged corpus is reused, saving a lot of time/compute.
+# Decide whether to rebuild or reuse the existing index.
+# Reusing an unchanged index avoids re-embedding the entire corpus,
+# which can take several minutes on first build.
 # ------------------------------------------------------------------
 fingerprint = _source_fingerprint()
 db_client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
@@ -164,7 +177,7 @@ if reuse:
         )
         print(f"♻️  Reusing existing index ({chroma_collection.count()} vectors) "
               f"— sources unchanged.")
-    except Exception as e:  # chromadb raises various types; treat any as "rebuild"
+    except Exception as e:  # chromadb raises various types; any failure triggers rebuild
         print(f"   (could not reuse existing index: {e}) — rebuilding.")
         reuse = False
 

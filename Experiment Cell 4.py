@@ -1,5 +1,33 @@
 # =============================================================
 # CELL 4: RUNNER (PDFs)
+#
+# STRATEGY:
+# This cell runs the core comparative experiment: Zero-Shot vs. RAG.
+# Both arms evaluate each PDF against the full set of Envision credits,
+# but differ in what reference material the model receives:
+#
+#   Arm A — Zero-Shot: the model receives the complete Envision rubric
+#     for a category plus the extracted PDF text. No retrieval step.
+#     This is the baseline, representing how well the model performs
+#     with only the structured workbook data and no external guidance.
+#
+#   Arm B — RAG: a short, focused retrieval query (category name +
+#     brief project summary) fetches the top-K most relevant passages
+#     from the vector index, which contains both workbook entries and
+#     guidance manual chunks. Those passages plus the PDF text are then
+#     passed to generation through the same call_ollama() function used
+#     by Arm A.
+#
+# Using the same generation path for both arms is a deliberate design
+# choice: it ensures that latency, token counts, and output validity
+# are directly comparable between the two arms. The only controlled
+# variable is whether retrieval-augmented context is provided — exactly
+# the effect this study aims to measure.
+#
+# The retrieval query intentionally omits the full PDF text. Embedding
+# models like MiniLM-L6 truncate inputs at 256 tokens; a long document
+# used as a query would be heavily truncated and degrade retrieval
+# quality. A short, semantically focused query produces better recall.
 # =============================================================
 print("=" * 70)
 print(" ENVISION PDF EXPERIMENT RUNNER")
@@ -17,29 +45,14 @@ with open(SYSTEM_PROMPT_PATH) as f:
 categories, meta = load_envision_by_category()
 category_names = list(categories.keys())
 
-# ------------------------------------------------------------------
-# FIX (methodological): the old RAG arm embedded the ENTIRE project PDF inside
-# the retrieval query (rag_query_engine.query(<full pdf>)). MiniLM truncates at
-# 256 tokens, so the retrieval query was mostly thrown away and retrieval quality
-# was unreliable. Worse, the two arms used different generation paths, so their
-# token/latency metrics were not comparable.
-#
-# This version:
-#   * uses a RETRIEVER with a SHORT, focused query (category + brief project
-#     summary) — what actually drives good retrieval,
-#   * feeds the retrieved passages + the full PDF into the SAME call_ollama()
-#     generation path used by the zero-shot arm.
-# Result: the only difference between the arms is the reference material the
-# model sees (full rubric vs. retrieved passages) — exactly the variable under
-# study — and both arms report identical metrics (tokens, latency, valid_json).
-# ------------------------------------------------------------------
+# Initialize the retriever once and reuse it across all files and runs.
 retriever = rag_index.as_retriever(similarity_top_k=RETRIEVAL_TOP_K)
 
 timing_log = []
 
 for file_idx, pdf_path in enumerate(PDF_FILES):
     base = os.path.splitext(os.path.basename(pdf_path))[0]
-    # FIX: prefix with the index so two PDFs sharing a basename can't collide.
+    # Prefix with index so two PDFs sharing a basename cannot produce colliding output paths.
     file_label = f"{file_idx:02d}_{base}"
     print(f'\n{"=" * 70}')
     print(f"FILE {file_idx + 1}/{len(PDF_FILES)}: {file_label}")
@@ -48,8 +61,6 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
     # --- PDF Extraction ---
     print("\n Extracting text from a PDF...")
     pdf_data = extract_pdf_metadata(pdf_path)
-    # FIX: explicitly check the extraction succeeded instead of marching on with
-    #      empty text. extract_pdf_metadata no longer hides failures.
     if not pdf_data["extraction_ok"]:
         print(f" ❌ Skipping {file_label}: extraction failed "
               f"(error={pdf_data['error']}, chars={pdf_data['n_chars']}).")
@@ -57,11 +68,10 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
     print(f" ✅ Text extracted ({pdf_data['n_pages']} pages, {pdf_data['n_chars']} chars).")
     pdf_json = json.dumps(pdf_data, indent=2, default=str)
 
-    # Short project summary used ONLY to steer retrieval (kept under the
-    # embedding token window so it is not truncated).
+    # Short project summary used only to steer the retrieval query.
+    # Kept under the embedding token window so it is not truncated.
     project_summary = pdf_data["extracted_text"].strip().replace("\n", " ")[:800]
 
-    # Save the extracted text for future reference
     save_result(pdf_data, os.path.join(RESULTS_DIR, file_label, "pdf_metadata.json"))
 
     # =====================================================
@@ -131,7 +141,9 @@ your system instructions."""
             n_credits = len(categories[cat_name])
             print(f"   Category: {cat_name} ({n_credits} credits)...", end=" ")
 
-            # 1) Retrieve with a SHORT, focused query (not the whole PDF).
+            # Step 1: Retrieve with a short, focused query rather than the full PDF.
+            # A concise query targeting the category and project context yields
+            # better semantic recall from the embedding model.
             retrieval_query = (
                 f"Envision {cat_name} category: credit applicability, evaluation "
                 f"criteria, scoring levels and points. Project context: {project_summary}"
@@ -158,8 +170,8 @@ your system instructions."""
 
                 retrieved_context = "\n\n".join(context_blocks)
 
-                # 2) Generate through the SAME path as zero-shot (call_ollama),
-                #    so metrics are directly comparable.
+                # Step 2: Generate through the same call_ollama() path as zero-shot,
+                # so token counts and latency metrics are directly comparable between arms.
                 user_msg = f"""## Retrieved Envision Reference (top-{RETRIEVAL_TOP_K})
 {retrieved_context}
 
