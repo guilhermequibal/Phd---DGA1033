@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"LD1.1\",\n      \"credit_name\": \"Provide Effective Leadership and Commitment\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project has a clear project management and architectural modeling team, indicating the presence of leadership and commitment.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project management and architectural modeling team identified\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B required for Enhanced, but only A is satisfied\",\n      \"concept_phase_actions\": [\"Develop a comprehensive project plan and schedule\"],\n      \"documentation_needed\": [\"Project charter\", \"Stakeholder engagement plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD1.2\",\n      \"credit_name\": \"Foster Collaboration and Teamwork\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project involves multiple disciplines, including architectural design, structural design, and MEP design, indicating the need for collaboration and teamwork.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Multiple disciplines involved in the project\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B required for Enhanced, but only A is satisfied\",\n      \"concept_phase_actions\": [\"Establish a collaboration plan and schedule regular team meetings\"],\n      \"documentation_needed\": [\"Collaboration plan\", \"Meeting minutes\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD1.3\",\n      \"credit_name\": \"Encourage Public Outreach and Participation\",\n      \"max_points\": 6,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project may impact the surrounding community, indicating the need for public outreach and participation.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Develop a public outreach and participation plan\"],\n      \"documentation_needed\": [\"Public outreach and participation plan\", \"Stakeholder engagement records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD1.4\",\n      \"credit_name\": \"Pursue Byproduct Synergies\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project may generate byproducts that can be utilized or sold, indicating the potential for byproduct synergies.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Identify potential byproducts and develop a plan for their utilization or sale\"],\n      \"documentation_needed\": [\"Byproduct utilization plan\", \"Market analysis\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD2.1\",\n      \"credit_name\": \"Establish a Sustainability Management Plan\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project requires a sustainability management plan to ensure effective implementation of sustainability measures.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Develop a sustainability management plan\"],\n      \"documentation_needed\": [\"Sustainability management plan\", \"Stakeholder engagement records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD2.2\",\n      \"credit_name\": \"Plan for Sustainable Communities\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project may impact the surrounding community, indicating the need for planning for sustainable communities.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Develop a plan for sustainable communities\"],\n      \"documentation_needed\": [\"Sustainable community plan\", \"Stakeholder engagement records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD2.3\",\n      \"credit_name\": \"Conduct a Life-Cycle Economic Evaluation\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project requires a life-cycle economic evaluation to ensure cost-effectiveness and sustainability.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Conduct a life-cycle economic evaluation\"],\n      \"documentation_needed\": [\"Life-cycle economic evaluation report\", \"Cost-benefit analysis\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD3.1\",\n      \"credit_name\": \"Encourage Sustainable Economic Development\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project may impact the local economy, indicating the need for encouraging sustainable economic development.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Develop a plan to encourage sustainable economic development\"],\n      \"documentation_needed\": [\"Sustainable economic development plan\", \"Stakeholder engagement records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD3.2\",\n      \"credit_name\": \"Support Local and Regional Businesses\",\n      \"max_points\": 6,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project may impact local and regional businesses, indicating the need for support.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Develop a plan to support local and regional businesses\"],\n      \"documentation_needed\": [\"Local and regional business support plan\", \"Stakeholder engagement records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"LD3.3\",\n      \"credit_name\": \"Conduct a Life-Cycle Assessment\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project requires a life-cycle assessment to ensure sustainability and minimize environmental impacts.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved, but neither is satisfied\",\n      \"concept_phase_actions\": [\"Conduct a life-cycle assessment\"],\n      \"documentation_needed\": [\"Life-cycle assessment report\", \"Environmental impact analysis\"],\n      \"pending_at_design_review\": true\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.05,
+  "generation_seconds": 425.34,
+  "elapsed_seconds": 425.39,
+  "output_tokens": 1983,
+  "input_tokens": 17191,
+  "retrieved_sources": [
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.3713
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3644
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3522
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3504
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3503
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3473
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3435
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3434
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3432
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3395
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p23",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.339
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p95",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3381
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p182",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3356
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3352
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3316
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 2,
+  "num_manual_hits": 13,
+  "success": true
+}

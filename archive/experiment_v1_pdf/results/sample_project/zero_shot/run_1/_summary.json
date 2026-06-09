@@ -1,0 +1,41 @@
+{
+  "experiment": "zero_shot",
+  "file": "sample_project",
+  "run": 1,
+  "model": "llama3.3:70b",
+  "temperature": 0.1,
+  "total_elapsed_seconds": 23985.33,
+  "categories": {
+    "Climate And Resilience": {
+      "elapsed_seconds": 3308.45,
+      "output_tokens": 1106,
+      "input_tokens": 53896,
+      "success": true
+    },
+    "Leadership": {
+      "elapsed_seconds": 7200.02,
+      "output_tokens": 0,
+      "input_tokens": 0,
+      "success": false
+    },
+    "Natural World": {
+      "elapsed_seconds": 3202.01,
+      "output_tokens": 918,
+      "input_tokens": 59469,
+      "success": true
+    },
+    "Quality of Life": {
+      "elapsed_seconds": 3074.58,
+      "output_tokens": 911,
+      "input_tokens": 58414,
+      "success": true
+    },
+    "Resource Allocation": {
+      "elapsed_seconds": 7200.1,
+      "output_tokens": 0,
+      "input_tokens": 0,
+      "success": false
+    }
+  },
+  "timestamp": "20260422_153628"
+}

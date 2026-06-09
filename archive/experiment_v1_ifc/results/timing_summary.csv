@@ -1,0 +1,7 @@
+experiment,file,run,seconds
+zero_shot,rag_ifc,1,10915.77
+zero_shot,rag_ifc,2,13376.23
+zero_shot,rag_ifc,3,15302.92
+rag,rag_ifc,1,5195.07
+rag,rag_ifc,2,6433.78
+rag,rag_ifc,3,6841.93

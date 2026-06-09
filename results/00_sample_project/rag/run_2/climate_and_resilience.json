@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"CR2.1\",\n      \"credit_name\": \"Avoid Unsuitable Development\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on site selection process\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No environmental impact assessment available\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct site selection process with environmental considerations\", \"Perform environmental impact assessment\"],\n      \"documentation_needed\": [\"Site selection report\", \"Environmental impact assessment\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"CR2.2\",\n      \"credit_name\": \"Assess Climate Change Vulnerability\",\n      \"max_points\": 20,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project location in Brownsville, PA, suggests potential climate change impacts\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No climate change vulnerability assessment available\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 8,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct climate change vulnerability assessment\"],\n      \"documentation_needed\": [\"Climate change vulnerability assessment report\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"CR2.3\",\n      \"credit_name\": \"Evaluate Risk and Resilience\",\n      \"max_points\": 26,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No risk assessment available\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No critical functions and dependencies identified\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B + C + D + E required for Conserving\",\n      \"concept_phase_actions\": [\"Conduct risk assessment\", \"Identify critical functions and dependencies\"],\n      \"documentation_needed\": [\"Risk assessment report\", \"Critical functions and dependencies documentation\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"CR2.4\",\n      \"credit_name\": \"Establish Resilience Goals and Strategies\",\n      \"max_points\": 20,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No project performance goals available\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No risk management strategies developed\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Enhanced\",\n      \"concept_phase_actions\": [\"Develop project performance goals\", \"Establish risk management strategies\"],\n      \"documentation_needed\": [\"Project performance goals document\", \"Risk management strategies report\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"CR2.5\",\n      \"credit_name\": \"Maximize Resilience\",\n      \"max_points\": 26,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No resilience goals and strategies developed\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No implementation of resilience strategies\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B + C + D + E required for Conserving\",\n      \"concept_phase_actions\": [\"Develop resilience goals and strategies\", \"Implement resilience strategies\"],\n      \"documentation_needed\": [\"Resilience goals and strategies document\", \"Implementation plan for resilience strategies\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"CR2.6\",\n      \"credit_name\": \"Improve Infrastructure Integration\",\n      \"max_points\": 18,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No infrastructure integration assessment available\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No beneficial integration of multiple infrastructure systems identified\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct infrastructure integration assessment\", \"Identify beneficial integration opportunities\"],\n      \"documentation_needed\": [\"Infrastructure integration assessment report\", \"Beneficial integration opportunities documentation\"],\n      \"pending_at_design_review\": true\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.05,
+  "generation_seconds": 271.67,
+  "elapsed_seconds": 271.72,
+  "output_tokens": 1181,
+  "input_tokens": 17617,
+  "retrieved_sources": [
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.4274
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3944
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.387
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.5",
+      "location": "Climate And Resilience",
+      "score": 0.3738
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.367
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3634
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.3",
+      "location": "Climate And Resilience",
+      "score": 0.3629
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p172",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3628
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p182",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3598
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.4",
+      "location": "Climate And Resilience",
+      "score": 0.3596
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p180",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3582
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3577
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p21",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3562
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p17",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3542
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p171",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3541
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 5,
+  "num_manual_hits": 10,
+  "success": true
+}

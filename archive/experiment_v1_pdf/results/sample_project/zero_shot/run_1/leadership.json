@@ -1,0 +1,7 @@
+{
+  "response": "ERROR: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=7200)",
+  "elapsed_seconds": 7200.02,
+  "eval_count": 0,
+  "prompt_eval_count": 0,
+  "success": false
+}

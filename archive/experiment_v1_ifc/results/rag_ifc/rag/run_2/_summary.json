@@ -1,0 +1,38 @@
+{
+  "experiment": "rag",
+  "file": "rag_ifc",
+  "run": 2,
+  "model": "llama3.3:70b",
+  "temperature": 0.1,
+  "retrieval_top_k": 15,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "total_elapsed_seconds": 6433.78,
+  "categories": {
+    "Climate And Resilience": {
+      "elapsed_seconds": 929.0,
+      "num_sources": 15,
+      "success": true
+    },
+    "Leadership": {
+      "elapsed_seconds": 1924.07,
+      "num_sources": 15,
+      "success": true
+    },
+    "Natural World": {
+      "elapsed_seconds": 1065.8,
+      "num_sources": 15,
+      "success": true
+    },
+    "Quality of Life": {
+      "elapsed_seconds": 759.44,
+      "num_sources": 15,
+      "success": true
+    },
+    "Resource Allocation": {
+      "elapsed_seconds": 1755.42,
+      "num_sources": 15,
+      "success": true
+    }
+  },
+  "timestamp": "20260419_010802"
+}

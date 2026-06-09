@@ -1,0 +1,408 @@
+{
+  "source_file": "rag_ifc.ifc",
+  "project_name": "7765328-33-A",
+  "project_description": "N/A",
+  "site_name": "Parking Symbol - ADA:Parking Symbol - ADA:791516",
+  "site_description": "N/A",
+  "latitude": "(40, 1, 20, 538978)",
+  "longitude": "(-79, -53, -11, -994970)",
+  "materials": [
+    "Metal Panels 50\"x60\" - White",
+    "Air",
+    "Rigid insulation",
+    "Gypsum Sheathing",
+    "Metal Stud Layer",
+    "Concrete, Cast-in-Place gray",
+    "Default Wall",
+    "Gypsum Wall Board",
+    "Steel, Paint Finish, Dark Gray",
+    "Metal Furring",
+    "Aluminum",
+    "Metal - Paint Finish - Grey",
+    "Wood - Birch",
+    "Shaft Liner",
+    "Aluminum Clad (Orange)",
+    "Aluminum Clad (Black)",
+    "Metal Panels 50\"x60\" - Brown",
+    "Metal - Steel",
+    "Elevator Annunicator Buttons",
+    "Elevator Annunciator Escutcheon",
+    "Elevator Call Buttons",
+    "Elevator Call Escutcheon",
+    "Ceramic - Wood Pattern",
+    "Concrete, Precast",
+    "Oriented Strand Board",
+    "Pine",
+    "Laminate, Ivory, Matte",
+    "Textile - Bamboo Weave",
+    "Steel, Chrome Plated",
+    "Glass",
+    "Terrazzo",
+    "Bronze, Architectural",
+    "Concrete, Lightweight",
+    "Parking Stripe",
+    "Roofing, EPDM Membrane",
+    "Metal Deck",
+    "<Unnamed>",
+    "Appliance - Steel - Black",
+    "Appliance - Stainless Steel",
+    "Appliance - Polycarbonate",
+    "Appliance - Door Trim",
+    "Appliance - Panel",
+    "Appliance - Controls",
+    "Paint - White Glossy",
+    "Porcelain, Linen",
+    "Counter Top",
+    "Steel, Polished",
+    "Cabinets - Handles",
+    "Cabinets",
+    "Mirror",
+    "Steel, Paint Finish, Ivory, Glossy",
+    "Appliance - Gasket",
+    "Metal - Paint Finish - Dark Gray, Matte",
+    "Concrete Masonry Units",
+    "Paint - White",
+    "Plywood, Sheathing",
+    "Birch",
+    "Cabinet",
+    "Wood - Stained",
+    "Metal - Aluminium",
+    "Metal - Painted - Grey",
+    "Metal Door - Brindle",
+    "Concrete, Precast Smooth, Light Grey",
+    "Metal - Steel, Polished",
+    "Porcelain - Ivory",
+    "Metal - Aluminum, Brushed",
+    "Steel, Paint Finish, Black",
+    "Roofing.Membrane.TPO",
+    "Rigid insulation, Tapered",
+    "Sheathing Roof Board",
+    "EIFS, Exterior Insulation",
+    "Clad - White",
+    "Default",
+    "Solar Infill (No Cells)",
+    "Solar 72 Cell (Square)",
+    "Stone Tiles",
+    "Stainless Steel, Brushed",
+    "Plastic - Generic - Charcoal",
+    "Plastic - Black - Matte",
+    "Stainless Steel, Polished",
+    "Matte Black",
+    "Metal - Powder Coated - White",
+    "Aluminum Satin Bronze",
+    "Plastic - Brown",
+    "Rubber - Black",
+    "Plastic-Blue",
+    "Plastic-Red",
+    "Wood",
+    "Plastic - White",
+    "Steel",
+    "Plastic - Generic - Gray",
+    "Asphalt, Pavement, Light Grey",
+    "Grass",
+    "Tree Grate",
+    "Tree Trunk",
+    "Tree Canopy",
+    "Brick, Common",
+    "Porcelain, Ivory",
+    "Red Plastic",
+    "FE_Brick - Running - Brown 2 1/2\" x 8\"",
+    "Linen, White",
+    "FE_Brick - Running - Grey 2\" x 8\"",
+    "Steel, Paint Finish, Ivory, Matte",
+    "Living Wall",
+    "Pea Stone - Brown",
+    "Soil",
+    "Paving - Brick Border",
+    "Planting Bed",
+    "Grass - Turf",
+    "Exterior Decking",
+    "Sculpture Bed",
+    "Oak Flooring, Espresso",
+    "Concrete, Polished",
+    "Glass, White, High Luminance",
+    "CMU, Split Face",
+    "Oak Flooring",
+    "Structure, Wood Joist/Rafter Layer",
+    "Metal Panels 50\"x60\" - Light Grey",
+    "Glass, Frosted",
+    "Aluminum - Anodized Rough (Grey)",
+    "metal - sheet metal",
+    "Metal Parapet - White",
+    "Steel Rusted",
+    "Paint - Grey Textured",
+    "Metal - Chrome",
+    "Leather",
+    "Laminate - Ivory,Matte",
+    "Brick, Dark Blend, Soldier",
+    "Wood - Teak",
+    "Steel, Paint Finish, Dark Gray, Matte",
+    "Iron, Wrought",
+    "Metal - Aluminum",
+    "Metal - Stainless",
+    "Plastic - Formed Plastic - White",
+    "Glass - White, High Luminance",
+    "Metal - Paint Finish - Ivory, Glossy",
+    "Umbrella",
+    "Supports",
+    "Painted Steel",
+    "Painted Yellow",
+    "Paper",
+    "Gravel",
+    "Earth",
+    "Asphalt, Pavement, Dark Grey",
+    "Water",
+    "FE_Brick - Running - Grey 2 1/2\" x 8\"",
+    "Pea Stone - Grey",
+    "FE_Brick - Soldier - Brown 2 1/2\" x 8\"",
+    "Stone",
+    "FE_Brick - Soldier - Grey 2\" x 8\"",
+    "FE_Brick - Soldier - Grey 2 1/2\" x 8\"",
+    "Copper, Patina",
+    "Quartz - Rust Brown (Banded)",
+    "Quartz - Rust Brown",
+    "Granite - Red",
+    "Quartz - Rust Brown Rope",
+    "Stone Arch",
+    "Material_0",
+    "Default Roof"
+  ],
+  "element_summary": {
+    "IfcAnnotation": 23,
+    "IfcBeam": 917,
+    "IfcBuildingElementProxy": 1455,
+    "IfcColumn": 191,
+    "IfcCovering": 68,
+    "IfcCurtainWall": 42,
+    "IfcDoor": 132,
+    "IfcFooting": 9,
+    "IfcMember": 1622,
+    "IfcPlate": 465,
+    "IfcRailing": 144,
+    "IfcRamp": 2,
+    "IfcRampFlight": 2,
+    "IfcRoof": 24,
+    "IfcSlab": 322,
+    "IfcStair": 31,
+    "IfcStairFlight": 49,
+    "IfcWall": 227,
+    "IfcWallStandardCase": 959,
+    "IfcWindow": 116,
+    "IfcFlowTerminal": 607,
+    "IfcElementAssembly": 76,
+    "IfcOpeningElement": 693,
+    "IfcFurnishingElement": 345,
+    "IfcTransportElement": 2,
+    "IfcGrid": 36,
+    "IfcDistributionPort": 533,
+    "IfcBuilding": 1,
+    "IfcBuildingStorey": 18,
+    "IfcSite": 1,
+    "IfcSpace": 161
+  },
+  "energy_devices": [],
+  "water_systems": [],
+  "lighting_fixtures": [
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:763179"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:773245"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":774052"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":774082"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":782462"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:785956"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:785961"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":785964"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":785965"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":785972"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:786320"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:786325"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":786328"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":786329"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":786336"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:786594"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:786599"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":786610"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:787069"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:787074"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":787077"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":787078"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":787085"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:787118"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:787123"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":787126"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":787127"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":787134"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:787198"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:787203"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":787214"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:787247"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:787252"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":787263"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:787296"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:787301"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":787312"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":799696"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall - Rectangular:36\"x36\" - Private:800258"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:800259"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":803109"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":808937"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":809467"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:809637"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall - Rectangular:36\"x36\" - Private:809638"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Shower Stall with Seat - Rectangular:48\"x36\" - Private:837992"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":838000"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Vanity-Round:19\" x 19\":838001"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Sink Kitchen-Island:18\" x 18\":838008"
+    },
+    {
+      "type": "IfcFlowTerminal",
+      "name": "Toilet-Domestic-3D:Toilet-Domestic-3D:838396"
+    }
+  ],
+  "sustainability_properties": {}
+}

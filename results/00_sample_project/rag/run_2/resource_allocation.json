@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"RA1.1\",\n      \"credit_name\": \"Reduce Embodied Carbon in Materials\",\n      \"max_points\": 20,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No material takeoff or embodied carbon analysis provided\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on recycled content or sustainable materials\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct material takeoff and embodied carbon analysis\", \"Research sustainable materials and recycled content options\"],\n      \"documentation_needed\": [\"Material takeoff report\", \"Embodied carbon analysis\", \"Sustainable materials research\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA1.2\",\n      \"credit_name\": \"Use Recycled Materials\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on recycled materials used\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on recycling rates or material sourcing\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Research recycled material options\", \"Develop recycling plan and tracking system\"],\n      \"documentation_needed\": [\"Recycled materials report\", \"Recycling plan and tracking documentation\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA1.3\",\n      \"credit_name\": \"Reduce Operational Waste\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on operational waste reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on waste management plan or recycling programs\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop operational waste reduction strategy\", \"Research waste management and recycling options\"],\n      \"documentation_needed\": [\"Operational waste reduction plan\", \"Waste management and recycling documentation\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA1.4\",\n      \"credit_name\": \"Reduce Construction Waste\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on construction waste reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on construction waste management plan or recycling programs\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop construction waste reduction strategy\", \"Research construction waste management and recycling options\"],\n      \"documentation_needed\": [\"Construction waste reduction plan\", \"Construction waste management and recycling documentation\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA1.5\",\n      \"credit_name\": \"Balance Earthwork On Site\",\n      \"max_points\": 6,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on earthwork balancing strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on earthwork management plan or soil conservation measures\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop earthwork balancing strategy\", \"Research earthwork management and soil conservation options\"],\n      \"documentation_needed\": [\"Earthwork balancing plan\", \"Earthwork management and soil conservation documentation\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA2.1\",\n      \"credit_name\": \"Reduce Operational Energy Consumption\",\n      \"max_points\": 20,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on operational energy reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on energy management plan or renewable energy systems\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop operational energy reduction strategy\", \"Research energy management and renewable energy options\"],\n      \"documentation_needed\": [\"Operational energy reduction plan\", \"Energy management and renewable energy documentation\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"RA2.2\",\n      \"credit_name\": \"Reduce Construction Energy Consumption\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on construction energy reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on construction energy management plan or fuel-efficient equipment\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop construction energy reduction strategy\", \"Research construction energy management and fuel-efficient equipment options\"],\n      \"documentation_needed\": [\"Construction energy reduction plan\", \"Construction energy management and fuel-efficient equipment documentation\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"RA2.3\",\n      \"credit_name\": \"Use Renewable Energy\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on renewable energy systems\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on renewable energy implementation plan or maintenance schedule\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Research renewable energy options\", \"Develop renewable energy implementation plan\"],\n      \"documentation_needed\": [\"Renewable energy report\", \"Renewable energy implementation plan and maintenance schedule\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"RA2.4\",\n      \"credit_name\": \"Commission and Monitor Energy Systems\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on energy system commissioning or monitoring\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on energy system maintenance schedule or performance metrics\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop energy system commissioning plan\", \"Research energy monitoring and maintenance options\"],\n      \"documentation_needed\": [\"Energy system commissioning report\", \"Energy monitoring and maintenance documentation\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"RA3.1\",\n      \"credit_name\": \"Preserve Water Resources\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on water conservation strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on water management plan or efficient fixtures\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop water conservation strategy\", \"Research water-efficient fixtures and appliances\"],\n      \"documentation_needed\": [\"Water conservation plan\", \"Water management documentation and efficient fixture specifications\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA3.2\",\n      \"credit_name\": \"Reduce Operational Water Consumption\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on operational water reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on water-efficient systems or rainwater harvesting\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop operational water reduction strategy\", \"Research water-efficient systems and rainwater harvesting options\"],\n      \"documentation_needed\": [\"Operational water reduction plan\", \"Water-efficient system documentation and rainwater harvesting design\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"RA3.3\",\n      \"credit_name\": \"Reduce Construction Water Consumption\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on construction water reduction strategies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on construction water management plan or efficient practices\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop construction water reduction strategy\", \"Research construction water management and efficient practice options\"],\n      \"documentation_needed\": [\"Construction water reduction plan\", \"Construction water management documentation and efficient practice guidelines\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"RA3.4\",\n      \"credit_name\": \"Monitor Water Systems\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on water system monitoring or metering\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No documentation on water system maintenance schedule or performance metrics\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop water system monitoring plan\", \"Research water metering and maintenance options\"],\n      \"documentation_needed\": [\"Water system monitoring report\", \"Water metering and maintenance documentation\"],\n      \"pending_at_design_review\": true\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.62,
+  "generation_seconds": 563.08,
+  "elapsed_seconds": 563.7,
+  "output_tokens": 2650,
+  "input_tokens": 17210,
+  "retrieved_sources": [
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3816
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.371
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3545
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3522
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3514
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p182",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3479
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3431
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3415
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3406
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p95",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3396
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p109",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3396
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3392
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3373
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3367
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3365
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 2,
+  "num_manual_hits": 13,
+  "success": true
+}

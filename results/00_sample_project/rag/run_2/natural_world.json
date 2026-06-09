@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"NW1.1\",\n      \"credit_name\": \"Conserve Natural Areas\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project is located in an area with potential natural habitats, and the credit's intent is to conserve these areas.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on natural area conservation\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on habitat restoration\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct natural area assessment\", \"Develop conservation plan\"],\n      \"documentation_needed\": [\"Natural area assessment report\", \"Conservation plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW1.2\",\n      \"credit_name\": \"Provide Wetland and Surface Water Buffers\",\n      \"max_points\": 10,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project is located near a water body, and the credit's intent is to provide buffers for wetlands and surface waters.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on buffer zones\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on water quality monitoring\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct wetland and surface water assessment\", \"Develop buffer zone plan\"],\n      \"documentation_needed\": [\"Wetland and surface water assessment report\", \"Buffer zone plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW2.2\",\n      \"credit_name\": \"Manage Stormwater\",\n      \"max_points\": 24,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project will impact stormwater runoff, and the credit's intent is to manage it.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on stormwater management plan\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on rate or quantity of runoff\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop stormwater management plan\", \"Conduct rate and quantity analysis\"],\n      \"documentation_needed\": [\"Stormwater management plan\", \"Rate and quantity analysis report\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW2.4\",\n      \"credit_name\": \"Protect Surface and Groundwater Quality\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project may impact surface and groundwater quality, and the credit's intent is to protect it.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on water quality monitoring\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on pollution prevention measures\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct water quality monitoring\", \"Develop pollution prevention plan\"],\n      \"documentation_needed\": [\"Water quality monitoring report\", \"Pollution prevention plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW3.3\",\n      \"credit_name\": \"Maintain Floodplain Functions\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project is located in a floodplain, and the credit's intent is to maintain its functions.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on floodplain assessment\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on vegetated zone preservation\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct floodplain assessment\", \"Develop vegetated zone preservation plan\"],\n      \"documentation_needed\": [\"Floodplain assessment report\", \"Vegetated zone preservation plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW3.5\",\n      \"credit_name\": \"Protect Soil Health\",\n      \"max_points\": 10,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project may impact soil health, and the credit's intent is to protect it.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on soil assessment\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on erosion control measures\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct soil assessment\", \"Develop erosion control plan\"],\n      \"documentation_needed\": [\"Soil assessment report\", \"Erosion control plan\"],\n      \"pending_at_design_review\": false\n    }\n  ]\n}\n```\n\nNote: The evaluation is based on the provided PDF metadata and the retrieved Envision reference. Since there is no specific information about the project's natural areas, wetlands, surface waters, stormwater management, floodplain functions, or soil health, all credits are marked as \"APPLICABLE\" but with insufficient data to determine the achievable level. The estimated points are therefore 0 for all credits. The concept phase actions and documentation needed are suggested based on the credit's intent and requirements.",
+  "valid_json": true,
+  "retrieval_seconds": 0.05,
+  "generation_seconds": 323.6,
+  "elapsed_seconds": 323.65,
+  "output_tokens": 1444,
+  "input_tokens": 17916,
+  "retrieved_sources": [
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3725
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.3694
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3635
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3405
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3388
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3375
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3366
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3364
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW2.2",
+      "location": "Natural World",
+      "score": 0.3346
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3336
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3333
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.333
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p109",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3318
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3317
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p153",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3311
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 3,
+  "num_manual_hits": 12,
+  "success": true
+}

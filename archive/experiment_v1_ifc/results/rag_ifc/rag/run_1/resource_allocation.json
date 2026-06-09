@@ -1,0 +1,83 @@
+{
+  "response": "To evaluate this infrastructure project against all Envision credits in the Resource Allocation category, we need to assess each credit based on the provided project BIM metadata.\n\nHere is a JSON response following the `credit_assessments` format:\n\n```json\n{\n  \"assessments\": [\n    {\n      \"credit_id\": \"RA1.1\",\n      \"credit_name\": \"Support Sustainable Procurement Practices\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": false\n        },\n        {\n          \"question_id\": \"B\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Sustainable procurement policy or program\", \"Percentage of materials meeting sustainable procurement requirements\"]\n    },\n    {\n      \"credit_id\": \"RA1.2\",\n      \"credit_name\": \"Use Recycled Materials\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Percentage of recycled materials used\"]\n    },\n    {\n      \"credit_id\": \"RA1.3\",\n      \"credit_name\": \"Reduce Operational Waste\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": false\n        },\n        {\n          \"question_id\": \"B\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Waste management plan\", \"Percentage of operational waste diverted\"]\n    },\n    {\n      \"credit_id\": \"RA1.4\",\n      \"credit_name\": \"Reduce Construction Waste\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": false\n        },\n        {\n          \"question_id\": \"B\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Comprehensive waste management plan\", \"Percentage of construction waste diverted\"]\n    },\n    {\n      \"credit_id\": \"RA2.2\",\n      \"credit_name\": \"Reduce Construction Energy Consumption\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": false\n        },\n        {\n          \"question_id\": \"B\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Energy conservation strategies implemented\", \"Number of energy reduction strategies\"]\n    },\n    {\n      \"credit_id\": \"RA2.3\",\n      \"credit_name\": \"Use Renewable Energy\",\n      \"applicability\": true,\n      \"questions\": [\n        {\n          \"question_id\": \"A\",\n          \"answer\": \"None\"\n        }\n      ],\n      \"achievable_level\": \"No Level\",\n      \"points\": 0,\n      \"documentation_gaps\": [\"Percentage of energy needs met from renewable sources\"]\n    }\n  ]\n}\n```\n\nThis assessment indicates that all credits in the Resource Allocation category are applicable to this project. However, due to the lack of information provided in the project BIM metadata, it is not possible to determine a higher achievable level for any of these credits. Therefore, the points awarded for each credit are 0, and there are documentation gaps identified for each credit that need to be addressed to improve the assessment.",
+  "elapsed_seconds": 847.3,
+  "retrieved_sources": [
+    {
+      "credit_id": "LD1.4",
+      "score": 0.474,
+      "category": "Leadership"
+    },
+    {
+      "credit_id": "RA1.4",
+      "score": 0.457,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "LD3.3",
+      "score": 0.4413,
+      "category": "Leadership"
+    },
+    {
+      "credit_id": "RA1.3",
+      "score": 0.4395,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "LD3.1",
+      "score": 0.4347,
+      "category": "Leadership"
+    },
+    {
+      "credit_id": "RA1.1",
+      "score": 0.4115,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "RA1.2",
+      "score": 0.4077,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "RA2.2",
+      "score": 0.4073,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "LD1.2",
+      "score": 0.4056,
+      "category": "Leadership"
+    },
+    {
+      "credit_id": "CR2.3",
+      "score": 0.4044,
+      "category": "Climate And Resilience"
+    },
+    {
+      "credit_id": "RA2.3",
+      "score": 0.4036,
+      "category": "Resource Allocation"
+    },
+    {
+      "credit_id": "NW1.1",
+      "score": 0.4009,
+      "category": "Natural World"
+    },
+    {
+      "credit_id": "QL1.3",
+      "score": 0.3967,
+      "category": "Quality of Life"
+    },
+    {
+      "credit_id": "LD1.1",
+      "score": 0.3961,
+      "category": "Leadership"
+    },
+    {
+      "credit_id": "QL2.2",
+      "score": 0.3959,
+      "category": "Quality of Life"
+    }
+  ],
+  "num_sources": 15,
+  "success": true
+}
