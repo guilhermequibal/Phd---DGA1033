@@ -37,7 +37,9 @@ torch.set_num_threads(N_THREADS)
 
 # --- GPU isolation ---
 # One GPU per user; violations cause immediate process termination on this server.
-GPU_DEVICE = os.environ.get("EXPERIMENT_GPU_DEVICE", "0")
+# Default to GPU 2: on Bool servers, GPUs 0-1 are commonly occupied by other users.
+# Override at launch time with EXPERIMENT_GPU_DEVICE=<id> if the available GPU differs.
+GPU_DEVICE = os.environ.get("EXPERIMENT_GPU_DEVICE", "2")
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU_DEVICE
 
 # Single source of truth for the environment verification performed in Cell 2.5.
@@ -67,11 +69,18 @@ PDF_FILES = [
 MODEL_NAME = os.environ.get("EXPERIMENT_MODEL", "llama3.3:70b")
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 TEMPERATURE = float(os.environ.get("EXPERIMENT_TEMPERATURE", "0.1"))
-CONTEXT_WINDOW = 128000
-MAX_OUTPUT_TOKENS = 8192
+# Context window sized so that all layers of llama3.3:70b Q4_K_M fit on a single
+# 48 GB A6000. With 32K context the KV cache is ~10 GB; model weights are ~42 GB;
+# total ~52 GB leaves only ~4–5 GB for CPU offload (~9 out of 80 layers), giving
+# ~5–10 t/s. At 128K the KV cache alone is ~41 GB, pushing ~66 layers to CPU and
+# reducing throughput to ~0.46 t/s — making multi-hour calls infeasible on one GPU.
+CONTEXT_WINDOW = 32000
+# 4000 output tokens gives ~267 tokens per credit for a 15-credit category,
+# enough for structured JSON with applicability, score, points, and justification.
+MAX_OUTPUT_TOKENS = 4000
 # At least 5 runs are recommended to support statistical claims about the results.
 NUM_RUNS = int(os.environ.get("EXPERIMENT_NUM_RUNS", "3"))
-OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "3600"))  # seconds
+OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "7200"))  # seconds
 OLLAMA_MAX_RETRIES = int(os.environ.get("OLLAMA_MAX_RETRIES", "2"))
 
 # --- RAG settings ---

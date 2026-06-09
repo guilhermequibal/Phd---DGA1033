@@ -66,7 +66,18 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
               f"(error={pdf_data['error']}, chars={pdf_data['n_chars']}).")
         continue
     print(f" ✅ Text extracted ({pdf_data['n_pages']} pages, {pdf_data['n_chars']} chars).")
-    pdf_json = json.dumps(pdf_data, indent=2, default=str)
+
+    # Cap extracted_text at 18 000 characters (~4 500 tokens) when building the
+    # LLM prompt. The largest category JSON is ~13 K tokens and the system prompt
+    # ~7 K tokens, so the total input already reaches ~24 K tokens before the PDF
+    # text is added. With CONTEXT_WINDOW=32 000 and MAX_OUTPUT_TOKENS=4 000 this
+    # leaves ~4 000 tokens for the PDF snippet, comfortably within budget.
+    # The original pdf_data dict (with full text) is saved to disk unchanged.
+    PDF_TEXT_BUDGET = 18000
+    pdf_data_for_llm = {**pdf_data}
+    if len(pdf_data_for_llm.get("extracted_text", "")) > PDF_TEXT_BUDGET:
+        pdf_data_for_llm["extracted_text"] = pdf_data_for_llm["extracted_text"][:PDF_TEXT_BUDGET]
+    pdf_json = json.dumps(pdf_data_for_llm, indent=2, default=str)
 
     # Short project summary used only to steer the retrieval query.
     # Kept under the embedding token window so it is not truncated.

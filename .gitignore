@@ -1,0 +1,18 @@
+# Vector index (binary, large, fully reproducible from source files)
+chroma_db/
+
+# Auto-generated combined script produced by launch_rag.sh
+_run_all_cells.py
+
+# Jupyter checkpoint files
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Ollama binary distribution
+ollama_oficial
+ollama_oficial.tar.zst
+
+# Stale artifacts left by aborted runs inside results/
+results/chroma_db/
+results/results/
+results/_run_all_cells.py
