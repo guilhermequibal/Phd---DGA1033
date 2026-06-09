@@ -70,8 +70,8 @@ for file_idx, pdf_path in enumerate(PDF_FILES):
     # Cap extracted_text at 18 000 characters (~4 500 tokens) when building the
     # LLM prompt. The largest category JSON is ~13 K tokens and the system prompt
     # ~7 K tokens, so the total input already reaches ~24 K tokens before the PDF
-    # text is added. With CONTEXT_WINDOW=32 000 and MAX_OUTPUT_TOKENS=4 000 this
-    # leaves ~4 000 tokens for the PDF snippet, comfortably within budget.
+    # text is added. With CONTEXT_WINDOW=32 000 and MAX_OUTPUT_TOKENS=6 000 this
+    # leaves ~2 000 tokens of buffer in the 32 K window, comfortably within budget.
     # The original pdf_data dict (with full text) is saved to disk unchanged.
     PDF_TEXT_BUDGET = 18000
     pdf_data_for_llm = {**pdf_data}

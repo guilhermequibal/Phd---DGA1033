@@ -19,7 +19,7 @@
 # that exceed 256 tokens; oversized chunks are partly discarded at
 # embedding time, degrading retrieval quality without any visible error.
 # =============================================================
-import os
+import os, datetime as _dt
 
 # --- Resource limits ---
 # Caps CPU threads to keep the shared server usable for other users.
@@ -75,9 +75,11 @@ TEMPERATURE = float(os.environ.get("EXPERIMENT_TEMPERATURE", "0.1"))
 # ~5–10 t/s. At 128K the KV cache alone is ~41 GB, pushing ~66 layers to CPU and
 # reducing throughput to ~0.46 t/s — making multi-hour calls infeasible on one GPU.
 CONTEXT_WINDOW = 32000
-# 4000 output tokens gives ~267 tokens per credit for a 15-credit category,
-# enough for structured JSON with applicability, score, points, and justification.
-MAX_OUTPUT_TOKENS = 4000
+# 6000 output tokens gives ~400 tokens per credit for a 15-credit category —
+# enough for applicability, per-question evaluation, justification, and gaps.
+# Raised from 4000 after the first run showed truncation in Natural World and
+# Quality of Life (13 credits each), where the response was cut mid-object.
+MAX_OUTPUT_TOKENS = 6000
 # At least 5 runs are recommended to support statistical claims about the results.
 NUM_RUNS = int(os.environ.get("EXPERIMENT_NUM_RUNS", "3"))
 OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "7200"))  # seconds
@@ -100,7 +102,18 @@ RETRIEVAL_TOP_K = 15
 REBUILD_INDEX = os.environ.get("REBUILD_INDEX", "auto")
 
 # --- Results directory ---
-RESULTS_DIR = os.path.join(PROJECT_DIR, "results")
+# Each experiment run is stored in its own dated subdirectory so that multiple
+# runs with different parameters can coexist and be compared directly.
+# The directory name encodes the key parameters that affect result quality,
+# making it immediately clear what changed between runs without opening any file.
+# Override EXPERIMENT_ID at launch time to give a run a custom label.
+_model_slug = MODEL_NAME.replace(":", "-").replace(".", "")
+_default_id  = (f"exp__{_dt.date.today().isoformat()}"
+                f"__ctx{CONTEXT_WINDOW // 1000}k"
+                f"__out{MAX_OUTPUT_TOKENS // 1000}k"
+                f"__{_model_slug}")
+EXPERIMENT_ID = os.environ.get("EXPERIMENT_ID", _default_id)
+RESULTS_DIR   = os.path.join(PROJECT_DIR, "results", EXPERIMENT_ID)
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 print("✅ Configuration loaded for the PDF experiment.")
@@ -110,4 +123,6 @@ print(f"   User guide: {os.path.basename(USER_GUIDE_PDF_PATH)}")
 print(f"   CPU threads: {N_THREADS} | GPU: CUDA_VISIBLE_DEVICES={GPU_DEVICE}")
 print(f"   Chunk size: {CHUNK_SIZE} chars (~{EMBEDDING_MAX_TOKENS} tok budget), "
       f"overlap {CHUNK_OVERLAP}")
-print(f"   Project dir: {PROJECT_DIR}")
+print(f"   Experiment ID: {EXPERIMENT_ID}")
+print(f"   Results dir:   {RESULTS_DIR}")
+print(f"   Project dir:   {PROJECT_DIR}")
