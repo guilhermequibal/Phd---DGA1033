@@ -275,3 +275,160 @@ timing_df = pd.DataFrame(timing_log)
 timing_df.to_csv(os.path.join(RESULTS_DIR, "timing_summary.csv"), index=False)
 print("\nTiming summary:")
 print(timing_df.to_string(index=False))
+
+# =========================================================
+# FLAT CSV EXPORT
+# Parses every per-category JSON file and writes one row per
+# (arm, run, category, credit), making it easy to load the
+# results directly into pandas, Excel, or any statistical tool
+# without needing to traverse the nested directory structure.
+#
+# Responses truncated by MAX_OUTPUT_TOKENS produce incomplete
+# JSON; the extractor captures every credit object that was
+# fully written before the cutoff and marks the file as
+# TRUNCATED so the analyst can filter or handle those rows.
+# =========================================================
+import csv as _csv
+import re as _re
+import glob as _glob
+
+_FLAT_CSV = os.path.join(RESULTS_DIR, "credit_assessments_flat.csv")
+
+_FIELDNAMES = [
+    "arm", "run", "file", "category",
+    "credit_id", "credit_name", "max_points",
+    "applicability", "estimated_level", "estimated_points",
+    "justification", "questions_summary",
+    "level_guide_reference", "concept_phase_actions", "documentation_needed",
+    "input_tokens", "output_tokens", "elapsed_seconds",
+    "valid_json", "truncated", "success",
+]
+
+
+def _extract_credits(response_text):
+    """Return (list[dict], truncated:bool) from a raw LLM response string.
+
+    Handles three cases:
+    - Clean JSON inside optional markdown fences (normal case).
+    - Truncated JSON where MAX_OUTPUT_TOKENS cut the response mid-object:
+      regex-extracts every fully-closed credit object written before the cut.
+    - Unrecoverable garbage: returns ([], True).
+    """
+    text = response_text.strip()
+    text = _re.sub(r"^```json?\n?", "", text)
+    text = _re.sub(r"\n?```\s*$", "", text)
+    start = text.find("{")
+    if start == -1:
+        return [], True
+
+    # Try the full string first (fast path for valid responses).
+    for end in range(len(text) - 1, start, -1):
+        if text[end] == "}":
+            try:
+                parsed = json.loads(text[start : end + 1])
+                return parsed.get("credit_assessments", []), False
+            except json.JSONDecodeError:
+                continue
+
+    # Full parse failed — truncated response.  Extract complete credit
+    # objects using a bracket-depth scanner so partial objects are skipped.
+    credits, depth, obj_start = [], 0, None
+    for i, ch in enumerate(text):
+        if ch == "{":
+            if depth == 0:
+                obj_start = i
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0 and obj_start is not None:
+                fragment = text[obj_start : i + 1]
+                try:
+                    obj = json.loads(fragment)
+                    if "credit_id" in obj:
+                        credits.append(obj)
+                except json.JSONDecodeError:
+                    pass
+    return credits, True  # partial list, mark as truncated
+
+
+def _qs_summary(questions_evaluated):
+    """Flatten questions_evaluated (dict or list) to a readable string."""
+    if isinstance(questions_evaluated, dict):
+        items = questions_evaluated.items()
+    elif isinstance(questions_evaluated, list):
+        # Some responses emit a list of {question, status, evidence} dicts.
+        items = ((q.get("question", q.get("letter", "?")), q) for q in questions_evaluated)
+    else:
+        return ""
+    parts = []
+    for q, v in items:
+        if not isinstance(v, dict):
+            parts.append(f"Q{q}:{v}")
+            continue
+        status = v.get("status", "?")
+        ev = v.get("evidence") or v.get("gap") or ""
+        parts.append(f"Q{q}:{status}" + (f"({ev[:80]})" if ev else ""))
+    return " | ".join(parts)
+
+
+flat_rows = []
+_pattern = os.path.join(RESULTS_DIR, "**", "run_*", "*.json")
+for _fpath in sorted(_glob.glob(_pattern, recursive=True)):
+    _fname = os.path.basename(_fpath)
+    if _fname.startswith("_") or "metadata" in _fname:
+        continue
+
+    _parts = _fpath.replace(RESULTS_DIR, "").strip("/").split("/")
+    if len(_parts) < 4:
+        continue
+    _file_label, _arm, _run_str, _cat_file = _parts[0], _parts[1], _parts[2], _parts[3]
+    _run_num  = int(_run_str.replace("run_", ""))
+    _category = _cat_file.replace(".json", "").replace("_", " ").title()
+
+    with open(_fpath) as _f:
+        _d = json.load(_f)
+
+    _credits, _truncated = _extract_credits(_d.get("response", ""))
+
+    _base = {
+        "arm":            _arm,
+        "run":            _run_num,
+        "file":           _file_label,
+        "category":       _category,
+        "input_tokens":   _d.get("prompt_eval_count", _d.get("input_tokens", "")),
+        "output_tokens":  _d.get("eval_count", _d.get("output_tokens", "")),
+        "elapsed_seconds": _d.get("elapsed_seconds", ""),
+        "valid_json":     _d.get("valid_json", False),
+        "truncated":      _truncated,
+        "success":        _d.get("success", False),
+    }
+
+    if not _credits:
+        flat_rows.append({**_base, **{k: "" for k in _FIELDNAMES if k not in _base}})
+        continue
+
+    for _c in _credits:
+        flat_rows.append({
+            **_base,
+            "credit_id":             _c.get("credit_id", ""),
+            "credit_name":           _c.get("credit_name", ""),
+            "max_points":            _c.get("max_points", ""),
+            "applicability":         _c.get("applicability", ""),
+            "estimated_level":       _c.get("estimated_level", ""),
+            "estimated_points":      _c.get("estimated_points", ""),
+            "justification":         _c.get("justification", ""),
+            "questions_summary":     _qs_summary(_c.get("questions_evaluated", {})),
+            "level_guide_reference": _c.get("level_guide_reference", ""),
+            "concept_phase_actions": "; ".join(_c.get("concept_phase_actions", [])),
+            "documentation_needed":  "; ".join(_c.get("documentation_needed", [])),
+        })
+
+with open(_FLAT_CSV, "w", newline="", encoding="utf-8") as _f:
+    _writer = _csv.DictWriter(_f, fieldnames=_FIELDNAMES, extrasaction="ignore")
+    _writer.writeheader()
+    _writer.writerows(flat_rows)
+
+print(f"\n✅ Flat CSV saved → {_FLAT_CSV}")
+print(f"   {len(flat_rows)} rows | "
+      f"{len([r for r in flat_rows if not r['truncated']])} complete | "
+      f"{len([r for r in flat_rows if r['truncated']])} from truncated responses")
