@@ -432,3 +432,158 @@ print(f"\n✅ Flat CSV saved → {_FLAT_CSV}")
 print(f"   {len(flat_rows)} rows | "
       f"{len([r for r in flat_rows if not r['truncated']])} complete | "
       f"{len([r for r in flat_rows if r['truncated']])} from truncated responses")
+
+# =========================================================
+# XLSX REPORT EXPORT
+# Duplicates the Document template and fills one sheet per
+# (arm, run) combination with formatted data for human review.
+# Headers are color-coded (blue = RAG, orange = Zero-Shot).
+# The Estimated Level column is shaded by Envision achievement
+# tier so reviewers can scan the rubric visually.
+# =========================================================
+try:
+    import openpyxl as _openpyxl
+    from openpyxl.styles import Font as _Font, PatternFill as _Fill
+    from openpyxl.styles import Alignment as _Align
+    from openpyxl.utils import get_column_letter as _gcl
+    import shutil as _shutil
+
+    _XLSX_OUT = os.path.join(RESULTS_DIR, "credit_assessments_report.xlsx")
+    _shutil.copy2(TEMPLATE_PATH, _XLSX_OUT)
+    _wb = _openpyxl.load_workbook(_XLSX_OUT)
+
+    # (header label, flat_rows key or sentinel, column width)
+    _XLSX_COLS = [
+        ("Arm",                    "arm",                    12),
+        ("Run",                    "run",                     6),
+        ("File",                   "file",                   22),
+        ("Category",               "category",               24),
+        ("Credit ID",              "credit_id",              10),
+        ("Credit Name",            "credit_name",            32),
+        ("Max Points",             "max_points",             11),
+        ("Applicability",          "applicability",          14),
+        ("Estimated Level",        "estimated_level",        17),
+        ("Estimated Points",       "estimated_points",       15),
+        ("% Achieved",             "__pct__",                12),
+        ("Justification",          "justification",          52),
+        ("Questions Summary",      "questions_summary",      52),
+        ("Level Guide Reference",  "level_guide_reference",  32),
+        ("Concept Phase Actions",  "concept_phase_actions",  42),
+        ("Documentation Needed",   "documentation_needed",   42),
+        ("Input Tokens",           "input_tokens",           13),
+        ("Output Tokens",          "output_tokens",          13),
+        ("Elapsed (s)",            "elapsed_seconds",        12),
+        ("Valid JSON",             "valid_json",             11),
+        ("Truncated",              "truncated",              11),
+        ("Success",                "success",                10),
+    ]
+
+    _HDR_RAG = _Fill("solid", fgColor="4472C4")   # blue
+    _HDR_ZS  = _Fill("solid", fgColor="ED7D31")   # orange
+    _FONT_W  = _Font(bold=True, color="FFFFFF", size=11)
+    _ALIGN_H = _Align(horizontal="center", vertical="center", wrap_text=True)
+    _ALIGN_W = _Align(vertical="top", wrap_text=True)
+    _ALIGN_C = _Align(horizontal="center", vertical="top")
+    _ALIGN_L = _Align(vertical="top", wrap_text=False)
+
+    # Envision achievement level → background fill color
+    _LVL_FILL = {
+        "not applicable": _Fill("solid", fgColor="D9D9D9"),
+        "no level":       _Fill("solid", fgColor="FF9999"),
+        "improved":       _Fill("solid", fgColor="FFFACD"),
+        "enhanced":       _Fill("solid", fgColor="FFD966"),
+        "superior":       _Fill("solid", fgColor="C6EFCE"),
+        "conserving":     _Fill("solid", fgColor="70AD47"),
+        "restorative":    _Fill("solid", fgColor="375623"),
+    }
+    _DARK_LEVELS = {"conserving", "restorative"}  # use white text on these
+
+    # Category banding: alternate two neutral fills per category group
+    _BAND = [_Fill("solid", fgColor="FFFFFF"), _Fill("solid", fgColor="F2F2F2")]
+
+    # Map sheet name → (arm key in flat_rows, run number)
+    _SHEET_MAP = {f"RAG Run {n}": ("rag", n) for n in range(1, 6)}
+    _SHEET_MAP.update({f"Zero Shot Run {n}": ("zero_shot", n) for n in range(1, 6)})
+
+    _long_cols = {"justification", "questions_summary", "level_guide_reference",
+                  "concept_phase_actions", "documentation_needed"}
+    _ctr_cols  = {"arm", "run", "credit_id", "max_points", "estimated_points",
+                  "__pct__", "input_tokens", "output_tokens", "elapsed_seconds",
+                  "valid_json", "truncated", "success"}
+
+    for _sname, (_arm_key, _run_num) in _SHEET_MAP.items():
+        if _sname not in _wb.sheetnames:
+            continue
+        _ws = _wb[_sname]
+        _ws.freeze_panes = "A2"
+        _hdr_fill = _HDR_RAG if _arm_key == "rag" else _HDR_ZS
+
+        # Write header row
+        for _ci, (_hdr, _, _w) in enumerate(_XLSX_COLS, start=1):
+            _c = _ws.cell(row=1, column=_ci, value=_hdr)
+            _c.fill = _hdr_fill
+            _c.font = _FONT_W
+            _c.alignment = _ALIGN_H
+            _ws.column_dimensions[_gcl(_ci)].width = _w
+        _ws.row_dimensions[1].height = 30
+
+        # Filter flat_rows for this arm + run
+        _rows = [r for r in flat_rows
+                 if str(r.get("arm", "")) == _arm_key
+                 and str(r.get("run", "")) == str(_run_num)]
+
+        # Write data rows
+        _prev_cat, _band_idx = None, -1
+        for _ri, _row in enumerate(_rows, start=2):
+            _cat = _row.get("category", "")
+            if _cat != _prev_cat:
+                _band_idx = (_band_idx + 1) % 2
+                _prev_cat = _cat
+
+            _lvl = str(_row.get("estimated_level", "")).strip().lower()
+            _lvl_fill  = _LVL_FILL.get(_lvl)
+            _base_fill = _BAND[_band_idx]
+            _dark = _lvl in _DARK_LEVELS
+
+            for _ci, (_, _key, _) in enumerate(_XLSX_COLS, start=1):
+                if _key == "__pct__":
+                    try:
+                        _ep = float(_row.get("estimated_points", ""))
+                        _mp = float(_row.get("max_points", ""))
+                        _val = round(_ep / _mp * 100, 1) if _mp else ""
+                    except (ValueError, TypeError):
+                        _val = ""
+                else:
+                    _val = _row.get(_key, "")
+
+                _cell = _ws.cell(row=_ri, column=_ci, value=_val)
+
+                if _lvl_fill and _key in ("estimated_level", "estimated_points", "__pct__"):
+                    _cell.fill = _lvl_fill
+                    if _dark:
+                        _cell.font = _Font(color="FFFFFF")
+                else:
+                    _cell.fill = _base_fill
+
+                if _key in _long_cols:
+                    _cell.alignment = _ALIGN_W
+                elif _key in _ctr_cols:
+                    _cell.alignment = _ALIGN_C
+                else:
+                    _cell.alignment = _ALIGN_L
+
+        _ws.auto_filter.ref = (
+            f"A1:{_gcl(len(_XLSX_COLS))}{max(1, len(_rows) + 1)}"
+        )
+
+    _wb.save(_XLSX_OUT)
+    print(f"\n✅ XLSX report saved → {_XLSX_OUT}")
+    print(f"   10 sheets (RAG Run 1-5 + Zero Shot Run 1-5)")
+
+except ImportError:
+    print("\n⚠️  openpyxl not installed — skipping XLSX export. "
+          "Run: pip install openpyxl")
+except Exception as _xlsx_err:
+    import traceback as _tb
+    print(f"\n⚠️  XLSX export failed: {_xlsx_err}")
+    _tb.print_exc()

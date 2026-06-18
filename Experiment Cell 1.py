@@ -80,8 +80,9 @@ CONTEXT_WINDOW = 32000
 # Raised from 4000 after the first run showed truncation in Natural World and
 # Quality of Life (13 credits each), where the response was cut mid-object.
 MAX_OUTPUT_TOKENS = 6000
-# At least 5 runs are recommended to support statistical claims about the results.
-NUM_RUNS = int(os.environ.get("EXPERIMENT_NUM_RUNS", "3"))
+# 5 runs per arm give enough replication to detect consistency patterns and
+# compute basic descriptive statistics (mean, SD) across the credit scores.
+NUM_RUNS = int(os.environ.get("EXPERIMENT_NUM_RUNS", "5"))
 OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "7200"))  # seconds
 OLLAMA_MAX_RETRIES = int(os.environ.get("OLLAMA_MAX_RETRIES", "2"))
 
@@ -115,6 +116,9 @@ _default_id  = (f"exp__{_dt.date.today().isoformat()}"
 EXPERIMENT_ID = os.environ.get("EXPERIMENT_ID", _default_id)
 RESULTS_DIR   = os.path.join(PROJECT_DIR, "results", EXPERIMENT_ID)
 os.makedirs(RESULTS_DIR, exist_ok=True)
+
+# Path to the Excel template used to produce the human-readable XLSX report.
+TEMPLATE_PATH = os.path.join(PROJECT_DIR, "Document template.xlsx")
 
 print("✅ Configuration loaded for the PDF experiment.")
 print(f"   Model: {MODEL_NAME}")
