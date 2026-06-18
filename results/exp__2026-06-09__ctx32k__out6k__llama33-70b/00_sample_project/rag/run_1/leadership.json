@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"LD1.1\",\n      \"credit_name\": \"Provide Effective Leadership and Commitment\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project team includes multiple disciplines (architectural, structural, MEP, civil, landscape)\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on sustainability goals or targets\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B required for Enhanced\",\n      \"concept_phase_actions\": [\"Develop sustainability goals and targets\"],\n      \"documentation_needed\": [\"Sustainability management plan\", \"Project charter or mission statement\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD1.2\",\n      \"credit_name\": \"Foster Collaboration and Teamwork\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Multiple consultants listed (Cartesian Inverse, Etienne Oiseau, Safe Harbor Engineering)\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on collaboration tools or processes\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B required for Enhanced\",\n      \"concept_phase_actions\": [\"Establish collaboration tools and processes\"],\n      \"documentation_needed\": [\"Collaboration plan\", \"Communication protocol\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD1.3\",\n      \"credit_name\": \"Encourage Public Outreach and Participation\",\n      \"max_points\": 6,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on public outreach or participation\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on community engagement\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop public outreach and participation plan\"],\n      \"documentation_needed\": [\"Public outreach plan\", \"Community engagement records\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD1.4\",\n      \"credit_name\": \"Pursue Byproduct Synergies\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on byproduct synergies\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on waste reduction strategies\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Investigate byproduct synergies and waste reduction strategies\"],\n      \"documentation_needed\": [\"Byproduct synergy plan\", \"Waste reduction strategy\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD2.1\",\n      \"credit_name\": \"Establish a Sustainability Management Plan\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on sustainability management plan\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on monitoring and reporting\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop sustainability management plan\"],\n      \"documentation_needed\": [\"Sustainability management plan\", \"Monitoring and reporting protocol\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD2.2\",\n      \"credit_name\": \"Plan for Sustainable Communities\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on community planning\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on social and economic benefits\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop community planning strategy\"],\n      \"documentation_needed\": [\"Community plan\", \"Social and economic benefit analysis\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD2.3\",\n      \"credit_name\": \"Conduct a Life-Cycle Economic Evaluation\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on life-cycle economic evaluation\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on cost-benefit analysis\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct life-cycle economic evaluation\"],\n      \"documentation_needed\": [\"Life-cycle economic evaluation report\", \"Cost-benefit analysis\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD3.1\",\n      \"credit_name\": \"Develop a Construction Management Plan\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on construction management plan\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on waste reduction and recycling\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop construction management plan\"],\n      \"documentation_needed\": [\"Construction management plan\", \"Waste reduction and recycling strategy\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD3.2\",\n      \"credit_name\": \"Implement a Quality Control Program\",\n      \"max_points\": 6,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on quality control program\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on testing and inspection\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop quality control program\"],\n      \"documentation_needed\": [\"Quality control plan\", \"Testing and inspection protocol\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"LD3.3\",\n      \"credit_name\": \"Conduct a Life-Cycle Assessment\",\n      \"max_points\": 10,\n      \"applicability\": \"Applicable\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on life-cycle assessment\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on environmental impacts\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct life-cycle assessment\"],\n      \"documentation_needed\": [\"Life-cycle assessment report\", \"Environmental impact analysis\"],\n      \"pending_at_design_review\": false\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.16,
+  "generation_seconds": 374.87,
+  "elapsed_seconds": 375.03,
+  "output_tokens": 1910,
+  "input_tokens": 17191,
+  "retrieved_sources": [
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.3713
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3644
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3522
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3504
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3503
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3473
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3435
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3434
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3432
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3395
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p23",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.339
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p95",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3381
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p182",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3356
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3352
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3316
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 2,
+  "num_manual_hits": 13,
+  "success": true
+}

@@ -1,0 +1,77 @@
+{
+  "experiment": "rag",
+  "file": "00_sample_project",
+  "run": 3,
+  "model": "llama3.3:70b",
+  "temperature": 0.1,
+  "retrieval_top_k": 15,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "index_sources": [
+    "envision_workbook",
+    "guidance_manual"
+  ],
+  "total_elapsed_seconds": 2029.39,
+  "categories": {
+    "Climate And Resilience": {
+      "elapsed_seconds": 265.8,
+      "retrieval_seconds": 0.06,
+      "generation_seconds": 265.74,
+      "output_tokens": 1295,
+      "input_tokens": 17617,
+      "num_sources": 15,
+      "num_workbook_hits": 5,
+      "num_manual_hits": 10,
+      "valid_json": true,
+      "success": true
+    },
+    "Leadership": {
+      "elapsed_seconds": 421.56,
+      "retrieval_seconds": 0.05,
+      "generation_seconds": 421.51,
+      "output_tokens": 2164,
+      "input_tokens": 17191,
+      "num_sources": 15,
+      "num_workbook_hits": 2,
+      "num_manual_hits": 13,
+      "valid_json": true,
+      "success": true
+    },
+    "Natural World": {
+      "elapsed_seconds": 273.7,
+      "retrieval_seconds": 0.05,
+      "generation_seconds": 273.65,
+      "output_tokens": 1317,
+      "input_tokens": 17916,
+      "num_sources": 15,
+      "num_workbook_hits": 3,
+      "num_manual_hits": 12,
+      "valid_json": true,
+      "success": true
+    },
+    "Quality of Life": {
+      "elapsed_seconds": 549.14,
+      "retrieval_seconds": 0.05,
+      "generation_seconds": 549.09,
+      "output_tokens": 2841,
+      "input_tokens": 17220,
+      "num_sources": 15,
+      "num_workbook_hits": 2,
+      "num_manual_hits": 13,
+      "valid_json": true,
+      "success": true
+    },
+    "Resource Allocation": {
+      "elapsed_seconds": 519.14,
+      "retrieval_seconds": 0.06,
+      "generation_seconds": 519.08,
+      "output_tokens": 2631,
+      "input_tokens": 17210,
+      "num_sources": 15,
+      "num_workbook_hits": 2,
+      "num_manual_hits": 13,
+      "valid_json": true,
+      "success": true
+    }
+  },
+  "timestamp": "20260609_214743"
+}

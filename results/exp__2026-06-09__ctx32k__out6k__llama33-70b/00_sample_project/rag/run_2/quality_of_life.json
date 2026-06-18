@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"QL1.1\",\n      \"credit_name\": \"Improve Community Quality of Life\",\n      \"max_points\": 26,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project involves a mixed-use development with residential, commercial, and community spaces, indicating potential for community quality of life improvements.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project includes live/work units and community spaces.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on community engagement and feedback mechanisms.\" },\n        \"C\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates green spaces and outdoor areas.\", \"gap\": null },\n        \"D\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Unclear if the project addresses local community needs and priorities.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 5,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Engage with local community to understand needs and priorities.\", \"Develop a plan for incorporating community feedback into the design.\"],\n      \"documentation_needed\": [\"Community engagement records\", \"Feedback mechanisms and response plans\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL1.2\",\n      \"credit_name\": \"Enhance Public Health & Safety\",\n      \"max_points\": 20,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes residential and commercial spaces, which require consideration of public health and safety.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates natural ventilation and daylighting strategies.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on indoor air quality management and monitoring.\" },\n        \"C\": { \"status\": \"Likely Yes\", \"evidence\": \"Project includes accessible and safe pedestrian paths.\", \"gap\": null }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 7,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for indoor air quality management and monitoring.\", \"Ensure accessibility and safety of pedestrian paths.\"],\n      \"documentation_needed\": [\"Indoor air quality management plan\", \"Pedestrian path design and safety features\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL1.3\",\n      \"credit_name\": \"Improve Construction Safety\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project involves construction activities that require consideration of safety protocols.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project includes a construction safety plan.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on worker training and education programs.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 5,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a comprehensive construction safety plan.\", \"Implement worker training and education programs.\"],\n      \"documentation_needed\": [\"Construction safety plan\", \"Worker training and education records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"QL1.4\",\n      \"credit_name\": \"Minimize Noise & Vibration\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes residential and commercial spaces, which require consideration of noise and vibration impacts.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates sound-absorbing materials and acoustic design strategies.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on vibration mitigation measures.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 3,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for noise and vibration mitigation.\", \"Incorporate sound-absorbing materials and acoustic design strategies.\"],\n      \"documentation_needed\": [\"Noise and vibration mitigation plan\", \"Acoustic design and material specifications\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL1.5\",\n      \"credit_name\": \"Minimize Light Pollution\",\n      \"max_points\": 12,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes exterior lighting, which requires consideration of light pollution impacts.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates energy-efficient and shielded lighting fixtures.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on lighting controls and scheduling.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 3,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for exterior lighting design and control.\", \"Incorporate energy-efficient and shielded lighting fixtures.\"],\n      \"documentation_needed\": [\"Exterior lighting design and control plan\", \"Lighting fixture specifications\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL1.6\",\n      \"credit_name\": \"Minimize Construction Impacts\",\n      \"max_points\": 8,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project involves construction activities that require consideration of environmental impacts.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project includes a construction waste management plan.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on air quality and noise monitoring during construction.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a comprehensive construction waste management plan.\", \"Implement air quality and noise monitoring during construction.\"],\n      \"documentation_needed\": [\"Construction waste management plan\", \"Air quality and noise monitoring records\"],\n      \"pending_at_design_review\": true\n    },\n    {\n      \"credit_id\": \"QL2.1\",\n      \"credit_name\": \"Improve Community Mobility\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes pedestrian and vehicular paths, which require consideration of mobility and accessibility.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates accessible and safe pedestrian paths.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on public transportation options and accessibility features.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 3,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for pedestrian and vehicular path design.\", \"Incorporate accessible and safe pedestrian paths.\"],\n      \"documentation_needed\": [\"Pedestrian and vehicular path design plan\", \"Accessibility features and public transportation options\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL2.2\",\n      \"credit_name\": \"Encourage Sustainable Transportation\",\n      \"max_points\": 16,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes parking and transportation infrastructure, which requires consideration of sustainable transportation options.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates electric vehicle charging stations.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on alternative transportation options and incentives.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 5,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for sustainable transportation options.\", \"Incorporate electric vehicle charging stations.\"],\n      \"documentation_needed\": [\"Sustainable transportation plan\", \"Alternative transportation options and incentives\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL2.3\",\n      \"credit_name\": \"Improve Access & Wayfinding\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes public spaces and paths, which require consideration of access and wayfinding.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates clear signage and wayfinding features.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on accessibility features and universal design principles.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 5,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for access and wayfinding.\", \"Incorporate clear signage and wayfinding features.\"],\n      \"documentation_needed\": [\"Access and wayfinding plan\", \"Accessibility features and universal design principles\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL3.1\",\n      \"credit_name\": \"Advance Equity & Social Justice\",\n      \"max_points\": 18,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project involves community engagement and social impact, which requires consideration of equity and social justice.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project includes community engagement and participation strategies.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on social impact assessment and mitigation measures.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 6,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for community engagement and participation.\", \"Conduct a social impact assessment and develop mitigation measures.\"],\n      \"documentation_needed\": [\"Community engagement and participation plan\", \"Social impact assessment and mitigation measures\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL3.2\",\n      \"credit_name\": \"Preserve Historic & Cultural Resources\",\n      \"max_points\": 18,\n      \"applicability\": \"Not Applicable\",\n      \"justification\": \"The project does not involve historic or cultural resources.\",\n      \"questions_evaluated\": {},\n      \"estimated_level\": null,\n      \"estimated_points\": 0,\n      \"level_guide_reference\": null,\n      \"concept_phase_actions\": [],\n      \"documentation_needed\": [],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"QL3.3\",\n      \"credit_name\": \"Enhance Views & Local Character\",\n      \"max_points\": 14,\n      \"applicability\": \"Applicable\",\n      \"justification\": \"The project includes public spaces and views, which require consideration of local character and visual impact.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Project incorporates design elements that reflect local character.\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"Lack of information on view preservation and enhancement strategies.\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 3,\n      \"level_guide_reference\": \"A + B\",\n      \"concept_phase_actions\": [\"Develop a plan for local character and visual impact.\", \"Incorporate design elements that reflect local character.\"],\n      \"documentation_needed\": [\"Local character and visual impact plan\", \"View preservation and enhancement strategies\"],\n      \"pending_at_design_review\": false\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.05,
+  "generation_seconds": 536.86,
+  "elapsed_seconds": 536.91,
+  "output_tokens": 2734,
+  "input_tokens": 17220,
+  "retrieved_sources": [
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3813
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.3719
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3654
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3594
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3587
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3482
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3458
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3448
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p109",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3428
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p23",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3384
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p95",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3382
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3372
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p182",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3368
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.336
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3355
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 2,
+  "num_manual_hits": 13,
+  "success": true
+}
