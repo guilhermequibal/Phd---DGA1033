@@ -1,17 +1,28 @@
+=== Starting experiment Thu Jun 18 09:52:16 AM EDT 2026 ===
 ✅ Configuration loaded for the PDF experiment.
    Model: llama3.3:70b
    PDF files: 1
    User guide: ISI Envision Manual_v3_EN_bookmarked-amendments.pdf
    CPU threads: 8 | GPU: CUDA_VISIBLE_DEVICES=2
    Chunk size: 870 chars (~256 tok budget), overlap 150
-   Experiment ID: exp__2026-06-09__ctx32k__out6k__llama33-70b
-   Results dir:   /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b
+   Experiment ID: exp__2026-06-18__ctx32k__out6k__llama33-70b
+   Results dir:   /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b
    Project dir:   /export/livia/home/vision/Gbaldessin/PHD---DGA1033
 ✅ Helper functions (PyMuPDF & Ollama) loaded successfully.
+✅ Resource limits verified (threads=8, GPU=2).
+✅ Launcher script written → /export/livia/home/vision/Gbaldessin/PHD---DGA1033/launch_rag.sh
+
+To run the full experiment headlessly:
+   bash launch_rag.sh            # starts session 'rag_experiment'
+   bash launch_rag.sh meuteste   # or give a custom session name
+
+To monitor:
+   screen -r rag_experiment      # attach
+   tail -f results/run.log       # or just watch the log file
 /export/livia/home/vision/Gbaldessin/miniconda3/lib/python3.13/site-packages/torch/cuda/__init__.py:180: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12040). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
   return torch._C._cuda_getDeviceCount() > 0
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 3064.08it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 3695.99it/s]
 [1mBertModel LOAD REPORT[0m from: sentence-transformers/all-MiniLM-L6-v2
 Key                     | Status     |  | 
 ------------------------+------------+--+-
@@ -22,10 +33,10 @@ Notes:
 ♻️  Reusing existing index (1084 vectors) — sources unchanged.
 ======================================================================
  ENVISION PDF EXPERIMENT RUNNER
- Started: 2026-06-09 16:35:07.259103
+ Started: 2026-06-18 09:52:53.886048
  Model: llama3.3:70b
  Files: 1 PDF file(s)
- Runs: 3 per experiment
+ Runs: 5 per experiment
 ======================================================================
 
 ======================================================================
@@ -34,99 +45,163 @@ FILE 1/1: 00_sample_project
 
  Extracting text from a PDF...
  ✅ Text extracted (34 pages, 83949 chars).
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/pdf_metadata.json
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/pdf_metadata.json
 
- --- ZERO-SHOT | Run 1/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/climate_and_resilience.json
-✅ (634.55s)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/leadership.json
-✅ (796.94s)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/natural_world.json
-✅ (1006.94s ⚠️ non-JSON)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/quality_of_life.json
-✅ (1245.35s ⚠️ non-JSON)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/resource_allocation.json
-✅ (647.95s)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/_summary.json
+ --- ZERO-SHOT | Run 1/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/climate_and_resilience.json
+✅ (1278.94s)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/leadership.json
+✅ (1177.26s)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/natural_world.json
+✅ (1505.17s ⚠️ non-JSON)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/quality_of_life.json
+✅ (1605.45s ⚠️ non-JSON)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/resource_allocation.json
+✅ (1048.96s)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_1/_summary.json
 
- --- ZERO-SHOT | Run 2/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/climate_and_resilience.json
-✅ (607.53s)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/leadership.json
-✅ (766.12s)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/natural_world.json
-✅ (1008.79s ⚠️ non-JSON)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/quality_of_life.json
-✅ (1244.95s ⚠️ non-JSON)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/resource_allocation.json
-✅ (549.41s)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/_summary.json
+ --- ZERO-SHOT | Run 2/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/climate_and_resilience.json
+✅ (1028.04s)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/leadership.json
+✅ (1265.58s)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/natural_world.json
+✅ (1622.76s ⚠️ non-JSON)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/quality_of_life.json
+✅ (2059.47s ⚠️ non-JSON)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/resource_allocation.json
+✅ (1079.88s)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_2/_summary.json
 
- --- ZERO-SHOT | Run 3/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/climate_and_resilience.json
-✅ (602.85s)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/leadership.json
-✅ (772.83s)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/natural_world.json
-✅ (998.64s ⚠️ non-JSON)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/quality_of_life.json
-✅ (1242.94s ⚠️ non-JSON)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/resource_allocation.json
-✅ (671.34s)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/_summary.json
+ --- ZERO-SHOT | Run 3/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/climate_and_resilience.json
+✅ (1016.63s)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/leadership.json
+✅ (1051.0s)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/natural_world.json
+✅ (1609.36s ⚠️ non-JSON)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/quality_of_life.json
+✅ (1839.89s ⚠️ non-JSON)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/resource_allocation.json
+✅ (857.55s)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_3/_summary.json
 
- --- RAG | Run 1/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/climate_and_resilience.json
-✅ (268.83s, 15 sources: 5 workbook + 10 manual)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/leadership.json
-✅ (375.03s, 15 sources: 2 workbook + 13 manual)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/natural_world.json
-✅ (295.61s, 15 sources: 3 workbook + 12 manual)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/quality_of_life.json
-✅ (533.67s, 15 sources: 2 workbook + 13 manual)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/resource_allocation.json
-✅ (502.67s, 15 sources: 2 workbook + 13 manual)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/_summary.json
+ --- ZERO-SHOT | Run 4/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/climate_and_resilience.json
+✅ (904.21s)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/leadership.json
+✅ (1277.3s)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/natural_world.json
+✅ (1592.4s ⚠️ non-JSON)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/quality_of_life.json
+✅ (1943.86s ⚠️ non-JSON)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/resource_allocation.json
+✅ (1050.38s)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_4/_summary.json
 
- --- RAG | Run 2/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/climate_and_resilience.json
-✅ (245.3s, 15 sources: 5 workbook + 10 manual)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/leadership.json
-✅ (382.1s, 15 sources: 2 workbook + 13 manual)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/natural_world.json
-✅ (291.12s, 15 sources: 3 workbook + 12 manual)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/quality_of_life.json
-✅ (536.91s, 15 sources: 2 workbook + 13 manual)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/resource_allocation.json
-✅ (496.52s, 15 sources: 2 workbook + 13 manual)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/_summary.json
+ --- ZERO-SHOT | Run 5/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/climate_and_resilience.json
+✅ (937.14s)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/leadership.json
+✅ (1361.59s)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/natural_world.json
+✅ (1562.31s ⚠️ non-JSON)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/quality_of_life.json
+✅ (1986.74s ⚠️ non-JSON)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/resource_allocation.json
+✅ (989.57s)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/zero_shot/run_5/_summary.json
 
- --- RAG | Run 3/3 ---
-   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/climate_and_resilience.json
-✅ (265.8s, 15 sources: 5 workbook + 10 manual)
-   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/leadership.json
-✅ (421.56s, 15 sources: 2 workbook + 13 manual)
-   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/natural_world.json
-✅ (273.7s, 15 sources: 3 workbook + 12 manual)
-   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/quality_of_life.json
-✅ (549.14s, 15 sources: 2 workbook + 13 manual)
-   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/resource_allocation.json
-✅ (519.14s, 15 sources: 2 workbook + 13 manual)
-   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/_summary.json
+ --- RAG | Run 1/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/climate_and_resilience.json
+✅ (366.91s, 15 sources: 5 workbook + 10 manual)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/leadership.json
+✅ (542.38s, 15 sources: 2 workbook + 13 manual)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/natural_world.json
+✅ (405.26s, 15 sources: 3 workbook + 12 manual)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/quality_of_life.json
+✅ (844.38s, 15 sources: 2 workbook + 13 manual)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/resource_allocation.json
+✅ (929.49s, 15 sources: 2 workbook + 13 manual)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_1/_summary.json
+
+ --- RAG | Run 2/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/climate_and_resilience.json
+✅ (610.15s, 15 sources: 5 workbook + 10 manual)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/leadership.json
+✅ (693.75s, 15 sources: 2 workbook + 13 manual)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/natural_world.json
+✅ (506.66s, 15 sources: 3 workbook + 12 manual)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/quality_of_life.json
+✅ (1069.15s, 15 sources: 2 workbook + 13 manual)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/resource_allocation.json
+✅ (930.85s, 15 sources: 2 workbook + 13 manual)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_2/_summary.json
+
+ --- RAG | Run 3/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/climate_and_resilience.json
+✅ (618.07s, 15 sources: 5 workbook + 10 manual)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/leadership.json
+✅ (702.88s, 15 sources: 2 workbook + 13 manual)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/natural_world.json
+✅ (551.74s, 15 sources: 3 workbook + 12 manual)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/quality_of_life.json
+✅ (1022.57s, 15 sources: 2 workbook + 13 manual)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/resource_allocation.json
+✅ (934.53s, 15 sources: 2 workbook + 13 manual)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_3/_summary.json
+
+ --- RAG | Run 4/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/climate_and_resilience.json
+✅ (432.19s, 15 sources: 5 workbook + 10 manual)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/leadership.json
+✅ (679.79s, 15 sources: 2 workbook + 13 manual)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/natural_world.json
+✅ (538.95s, 15 sources: 3 workbook + 12 manual)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/quality_of_life.json
+✅ (865.47s, 15 sources: 2 workbook + 13 manual)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/resource_allocation.json
+✅ (772.29s, 15 sources: 2 workbook + 13 manual)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_4/_summary.json
+
+ --- RAG | Run 5/5 ---
+   Category: Climate And Resilience (9 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/climate_and_resilience.json
+✅ (515.75s, 15 sources: 5 workbook + 10 manual)
+   Category: Leadership (11 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/leadership.json
+✅ (535.67s, 15 sources: 2 workbook + 13 manual)
+   Category: Natural World (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/natural_world.json
+✅ (384.86s, 15 sources: 3 workbook + 12 manual)
+   Category: Quality of Life (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/quality_of_life.json
+✅ (782.95s, 15 sources: 2 workbook + 13 manual)
+   Category: Resource Allocation (13 credits)...    Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/resource_allocation.json
+✅ (821.87s, 15 sources: 2 workbook + 13 manual)
+   Salvo: /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/00_sample_project/rag/run_5/_summary.json
 
 ======================================================================
  ALL EXPERIMENTS COMPLETE
- Finished: 2026-06-09 21:47:43.862212
+ Finished: 2026-06-18 23:58:07.266375
 ======================================================================
 
 Timing summary:
 experiment              file  run  seconds
- zero_shot 00_sample_project    1  4331.79
- zero_shot 00_sample_project    2  4177.13
- zero_shot 00_sample_project    3  4288.78
-       rag 00_sample_project    1  1975.88
-       rag 00_sample_project    2  1952.00
-       rag 00_sample_project    3  2029.39
+ zero_shot 00_sample_project    1  6615.84
+ zero_shot 00_sample_project    2  7055.81
+ zero_shot 00_sample_project    3  6374.95
+ zero_shot 00_sample_project    4  6768.30
+ zero_shot 00_sample_project    5  6837.42
+       rag 00_sample_project    1  3088.47
+       rag 00_sample_project    2  3810.60
+       rag 00_sample_project    3  3829.83
+       rag 00_sample_project    4  3288.74
+       rag 00_sample_project    5  3041.16
 
-✅ Flat CSV saved → /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-09__ctx32k__out6k__llama33-70b/credit_assessments_flat.csv
-   247 rows | 241 complete | 6 from truncated responses
+✅ Flat CSV saved → /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/credit_assessments_flat.csv
+   410 rows | 400 complete | 10 from truncated responses
+/export/livia/home/vision/Gbaldessin/miniconda3/lib/python3.13/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Unknown extension is not supported and will be removed
+  warn(msg)
+/export/livia/home/vision/Gbaldessin/miniconda3/lib/python3.13/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Conditional Formatting extension is not supported and will be removed
+  warn(msg)
+
+✅ XLSX report saved → /export/livia/home/vision/Gbaldessin/PHD---DGA1033/results/exp__2026-06-18__ctx32k__out6k__llama33-70b/credit_assessments_report.xlsx
+   10 sheets (RAG Run 1-5 + Zero Shot Run 1-5)
+=== Finished Thu Jun 18 11:58:15 PM EDT 2026 ===

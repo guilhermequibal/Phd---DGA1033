@@ -1,0 +1,105 @@
+{
+  "response": "```json\n{\n  \"credit_assessments\": [\n    {\n      \"credit_id\": \"NW1.1\",\n      \"credit_name\": \"Conserve Natural Areas\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project is located in a specific area (Brownsville, PA) and has a defined site boundary, indicating potential natural areas to conserve.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on natural areas within the project site\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on habitat restoration or enhancement\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct site assessment to identify natural areas\", \"Research local conservation goals and regulations\"],\n      \"documentation_needed\": [\"Site assessment report\", \"Conservation plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW1.2\",\n      \"credit_name\": \"Provide Wetland and Surface Water Buffers\",\n      \"max_points\": 10,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project's location near a water body (implied by the presence of a stormwater management plan) suggests potential wetlands or surface waters that may require buffers.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on wetland or surface water buffers\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on buffer zone maintenance\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct wetland delineation\", \"Research local buffer zone requirements\"],\n      \"documentation_needed\": [\"Wetland delineation report\", \"Buffer zone maintenance plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW2.2\",\n      \"credit_name\": \"Manage Stormwater\",\n      \"max_points\": 24,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project's stormwater management plan indicates an impact on stormwater runoff, making this credit applicable.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Likely Yes\", \"evidence\": \"Stormwater management plan mentioned in the PDF metadata\", \"gap\": null },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on rate or quantity of runoff\" }\n      },\n      \"estimated_level\": \"Improved\",\n      \"estimated_points\": 2,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Develop stormwater management plan\", \"Research local stormwater regulations\"],\n      \"documentation_needed\": [\"Stormwater management plan\", \"Runoff calculation report\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW2.4\",\n      \"credit_name\": \"Protect Surface and Groundwater Quality\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project's potential impact on surface and groundwater quality, as implied by the stormwater management plan, makes this credit applicable.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on surface or groundwater protection measures\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on water quality monitoring\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Research local water quality regulations\", \"Develop surface and groundwater protection plan\"],\n      \"documentation_needed\": [\"Surface and groundwater protection plan\", \"Water quality monitoring report\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW3.3\",\n      \"credit_name\": \"Maintain Floodplain Functions\",\n      \"max_points\": 14,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project's location in a floodplain (implied by the presence of a stormwater management plan) suggests potential impacts on floodplain functions.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on floodplain functions\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on vegetated zones within the floodplain\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Conduct floodplain analysis\", \"Research local floodplain regulations\"],\n      \"documentation_needed\": [\"Floodplain analysis report\", \"Vegetated zone maintenance plan\"],\n      \"pending_at_design_review\": false\n    },\n    {\n      \"credit_id\": \"NW3.5\",\n      \"credit_name\": \"Protect Soil Health\",\n      \"max_points\": 10,\n      \"applicability\": \"APPLICABLE\",\n      \"justification\": \"The project's potential impact on soil health, as implied by the presence of a site plan, makes this credit applicable.\",\n      \"questions_evaluated\": {\n        \"A\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No information on soil health protection measures\" },\n        \"B\": { \"status\": \"Insufficient Data\", \"evidence\": null, \"gap\": \"No data on soil erosion control\" }\n      },\n      \"estimated_level\": \"No Level\",\n      \"estimated_points\": 0,\n      \"level_guide_reference\": \"A + B required for Improved\",\n      \"concept_phase_actions\": [\"Research local soil health regulations\", \"Develop soil health protection plan\"],\n      \"documentation_needed\": [\"Soil health protection plan\", \"Soil erosion control report\"],\n      \"pending_at_design_review\": false\n    }\n  ]\n}\n```",
+  "valid_json": true,
+  "retrieval_seconds": 0.08,
+  "generation_seconds": 538.87,
+  "elapsed_seconds": 538.95,
+  "output_tokens": 1404,
+  "input_tokens": 17916,
+  "retrieved_sources": [
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p105",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3725
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "CR2.2",
+      "location": "Climate And Resilience",
+      "score": 0.3694
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW3.3",
+      "location": "Natural World",
+      "score": 0.3635
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p175",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3405
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p190",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3388
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p4",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3375
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p56",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3366
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p24",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3364
+    },
+    {
+      "source_type": "envision_workbook",
+      "source_id": "NW2.2",
+      "location": "Natural World",
+      "score": 0.3346
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p162",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3336
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p173",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3333
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p69",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.333
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p109",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3318
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p140",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3317
+    },
+    {
+      "source_type": "guidance_manual",
+      "source_id": "p153",
+      "location": "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf",
+      "score": 0.3311
+    }
+  ],
+  "num_sources": 15,
+  "num_workbook_hits": 3,
+  "num_manual_hits": 12,
+  "success": true
+}

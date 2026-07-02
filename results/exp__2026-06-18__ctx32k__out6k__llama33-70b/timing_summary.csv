@@ -1,0 +1,11 @@
+experiment,file,run,seconds
+zero_shot,00_sample_project,1,6615.84
+zero_shot,00_sample_project,2,7055.81
+zero_shot,00_sample_project,3,6374.95
+zero_shot,00_sample_project,4,6768.3
+zero_shot,00_sample_project,5,6837.42
+rag,00_sample_project,1,3088.47
+rag,00_sample_project,2,3810.6
+rag,00_sample_project,3,3829.83
+rag,00_sample_project,4,3288.74
+rag,00_sample_project,5,3041.16
