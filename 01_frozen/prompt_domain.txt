@@ -1,6 +1,6 @@
 <!-- prompt_domain_version: 1.0 -->
 <!-- role: domain logic (Envision v3 evaluation logic: identity, knowledge base, framework structure, applicability rules, scoring pipeline, source-ingestion rules, critical rules, conversation behavior). -->
-<!-- status: FROZEN — change only via documented domain guidance (see ../CONFIG_POLICY.md and ../CHANGELOG.md). Concatenated with prompt_output_schema.txt at load time (Experiment Cell 4). -->
+<!-- status: FROZEN — change only via documented domain guidance (see ../CHANGELOG.md). Concatenated with prompt_output_schema.txt at load time (Experiment Cell 4). -->
 
 # Envision v3 RAG System Prompt — Infrastructure Project Sustainability Evaluator (Concept Phase)
 

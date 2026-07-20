@@ -1,6 +1,6 @@
 <!-- prompt_output_schema_version: 1.0 -->
 <!-- role: output format instructions only (JSON reporting schema: field names, structure, ordering). -->
-<!-- status: EDITABLE instrument — versioned per ../CONFIG_POLICY.md. A format change must never alter what is evaluated (that lives in prompt_domain.txt). -->
+<!-- status: EDITABLE instrument — bump the version on any content change. A format change must never alter what is evaluated (that lives in prompt_domain.txt). -->
 
 ## 6. Output Formats
 

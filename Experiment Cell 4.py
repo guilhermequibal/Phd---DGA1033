@@ -38,9 +38,9 @@ print(f" Runs: {NUM_RUNS} per experiment")
 print("=" * 70)
 
 # Load the two-layer system prompt: frozen domain logic + versioned output
-# schema (see CONFIG_POLICY.md). Concatenating them here, rather than storing
-# one merged file, lets the output format be iterated on independently of the
-# evaluation logic while keeping both versions traceable per run.
+# schema. Concatenating them here, rather than storing one merged file, lets
+# the output format be iterated on independently of the evaluation logic
+# while keeping both versions traceable per run.
 domain_text, domain_version, domain_sha256 = read_versioned_prompt(PROMPT_DOMAIN_PATH)
 schema_text, schema_version, schema_sha256 = read_versioned_prompt(PROMPT_OUTPUT_SCHEMA_PATH)
 system_prompt = domain_text + "\n\n" + schema_text
@@ -50,7 +50,7 @@ print(f" Prompt output schema: v{schema_version} ({schema_sha256[:12]})")
 
 # One manifest per experiment, recording every frozen/adjustable component's
 # version and hash so results are traceable and never compared across a
-# silent instrument change (see CONFIG_POLICY.md).
+# silent instrument change.
 experiment_manifest = {
     "experiment_id": EXPERIMENT_ID,
     "prompt_domain_version": domain_version,

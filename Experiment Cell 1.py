@@ -54,18 +54,18 @@ try:
 except NameError:
     PROJECT_DIR = os.path.abspath(os.environ.get("PROJECT_DIR", "."))
 
-# The project is organized into three labelled folders (see README.md and
-# CONFIG_POLICY.md). Executable code stays at the project root; only data,
-# instruments and outputs live in these subfolders. All data paths are
-# defined here so a folder move only ever touches this cell.
+# The project is organized into three labelled folders. Executable code
+# stays at the project root; only data, instruments and outputs live in
+# these subfolders. All data paths are defined here so a folder move only
+# ever touches this cell.
 FROZEN_DIR     = os.path.join(PROJECT_DIR, "01_frozen")      # ⛔ do not edit without documented domain guidance
 ADJUSTABLE_DIR = os.path.join(PROJECT_DIR, "02_adjustable")  # ✍️ the study's file-level independent variables
 OUTPUTS_DIR    = os.path.join(PROJECT_DIR, "03_outputs")     # generated results, manifests and logs
 
 # --- Frozen inputs ---
 ENVISION_INDEX_PATH = os.path.join(FROZEN_DIR, "envision_index.json")
-# The system prompt is split into two versioned layers (see CONFIG_POLICY.md):
-# domain logic (frozen, what is evaluated) lives in 01_frozen; the output
+# The system prompt is split into two versioned layers: domain logic
+# (frozen, what is evaluated) lives in 01_frozen; the output
 # schema (editable instrument, how it is reported) lives in 02_adjustable.
 # Cell 4 reads both, records their versions and SHA-256 hashes, and
 # concatenates them into the final system prompt.

@@ -245,7 +245,7 @@ def call_ollama(system_prompt, user_message, timeout=None, max_retries=None):
 
 # ---------- PROMPT VERSIONING ----------
 # Supports the two-layer prompt (01_frozen/prompt_domain.txt +
-# 02_adjustable/prompt_output_schema.txt, see CONFIG_POLICY.md). Each file's
+# 02_adjustable/prompt_output_schema.txt). Each file's
 # first line carries a version comment
 # (e.g. "<!-- prompt_domain_version: 1.0 -->"); every run records the version
 # and SHA-256 hash of both files so results are traceable to an exact
