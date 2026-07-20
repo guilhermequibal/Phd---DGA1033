@@ -54,16 +54,33 @@ try:
 except NameError:
     PROJECT_DIR = os.path.abspath(os.environ.get("PROJECT_DIR", "."))
 
-ENVISION_INDEX_PATH = os.path.join(PROJECT_DIR, "envision_index.json")
-SYSTEM_PROMPT_PATH = os.path.join(PROJECT_DIR, "rag_system_prompt.txt")
+# The project is organized into three labelled folders (see README.md and
+# CONFIG_POLICY.md). Executable code stays at the project root; only data,
+# instruments and outputs live in these subfolders. All data paths are
+# defined here so a folder move only ever touches this cell.
+FROZEN_DIR     = os.path.join(PROJECT_DIR, "01_frozen")      # ⛔ do not edit without documented domain guidance
+ADJUSTABLE_DIR = os.path.join(PROJECT_DIR, "02_adjustable")  # ✍️ the study's file-level independent variables
+OUTPUTS_DIR    = os.path.join(PROJECT_DIR, "03_outputs")     # generated results, manifests and logs
+
+# --- Frozen inputs ---
+ENVISION_INDEX_PATH = os.path.join(FROZEN_DIR, "envision_index.json")
+# The system prompt is split into two versioned layers (see CONFIG_POLICY.md):
+# domain logic (frozen, what is evaluated) lives in 01_frozen; the output
+# schema (editable instrument, how it is reported) lives in 02_adjustable.
+# Cell 4 reads both, records their versions and SHA-256 hashes, and
+# concatenates them into the final system prompt.
+PROMPT_DOMAIN_PATH = os.path.join(FROZEN_DIR, "prompt_domain.txt")
 USER_GUIDE_PDF_PATH = os.path.join(
-    PROJECT_DIR, "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf"
+    FROZEN_DIR, "ISI Envision Manual_v3_EN_bookmarked-amendments.pdf"
 )
 
-# List of project PDF files to evaluate
+# List of project PDF files to evaluate (frozen test-project set)
 PDF_FILES = [
-    os.path.join(PROJECT_DIR, "sample_project.pdf"),
+    os.path.join(FROZEN_DIR, "sample_project.pdf"),
 ]
+
+# --- Adjustable instruments ---
+PROMPT_OUTPUT_SCHEMA_PATH = os.path.join(ADJUSTABLE_DIR, "prompt_output_schema.txt")
 
 # --- Model settings ---
 MODEL_NAME = os.environ.get("EXPERIMENT_MODEL", "llama3.3:70b")
@@ -96,6 +113,8 @@ EMBEDDING_MAX_TOKENS = int(os.environ.get("EMBEDDING_MAX_TOKENS", "256"))
 CHARS_PER_TOKEN = 4  # rough English heuristic used only to size chunks
 CHUNK_SIZE = int(EMBEDDING_MAX_TOKENS * CHARS_PER_TOKEN * 0.85)  # ~870 chars, safe margin
 CHUNK_OVERLAP = 150
+# Generated vector index: a build artifact rebuilt from the frozen sources
+# (gitignored, not a hand-edited input), so it stays at the project root.
 CHROMA_DB_PATH = os.path.join(PROJECT_DIR, "chroma_db")
 RETRIEVAL_TOP_K = 15
 # "auto" rebuilds the index only when source files or parameters change,
@@ -114,16 +133,19 @@ _default_id  = (f"exp__{_dt.date.today().isoformat()}"
                 f"__out{MAX_OUTPUT_TOKENS // 1000}k"
                 f"__{_model_slug}")
 EXPERIMENT_ID = os.environ.get("EXPERIMENT_ID", _default_id)
-RESULTS_DIR   = os.path.join(PROJECT_DIR, "results", EXPERIMENT_ID)
+RESULTS_DIR   = os.path.join(OUTPUTS_DIR, EXPERIMENT_ID)
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-# Path to the Excel template used to produce the human-readable XLSX report.
-TEMPLATE_PATH = os.path.join(PROJECT_DIR, "Document template.xlsx")
+# Path to the Excel template (adjustable output-format instrument) used to
+# produce the human-readable XLSX report.
+TEMPLATE_PATH = os.path.join(ADJUSTABLE_DIR, "Document template.xlsx")
 
 print("✅ Configuration loaded for the PDF experiment.")
 print(f"   Model: {MODEL_NAME}")
 print(f"   PDF files: {len(PDF_FILES)}")
 print(f"   User guide: {os.path.basename(USER_GUIDE_PDF_PATH)}")
+print(f"   Prompt domain:        {PROMPT_DOMAIN_PATH}")
+print(f"   Prompt output schema: {PROMPT_OUTPUT_SCHEMA_PATH}")
 print(f"   CPU threads: {N_THREADS} | GPU: CUDA_VISIBLE_DEVICES={GPU_DEVICE}")
 print(f"   Chunk size: {CHUNK_SIZE} chars (~{EMBEDDING_MAX_TOKENS} tok budget), "
       f"overlap {CHUNK_OVERLAP}")

@@ -4,7 +4,7 @@
 #
 # Starts the GPU-enabled Ollama server (if not already running), then
 # concatenates all Experiment Cell *.py files in order and runs them as a
-# single Python process, writing stdout/stderr to results/run.log.
+# single Python process, writing stdout/stderr to 03_outputs/run.log.
 #
 # Requires the official Ollama binary at /export/livia/home/vision/Gbaldessin/.local/ollama/bin/ollama
 # (installed separately from the conda-bundled CPU-only version).
@@ -12,7 +12,7 @@ set -euo pipefail
 
 SESSION="${1:-rag_experiment}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-LOG="$SCRIPT_DIR/results/run.log"
+LOG="$SCRIPT_DIR/03_outputs/run.log"
 GPU="${EXPERIMENT_GPU_DEVICE:-2}"
 OLLAMA_BIN="/export/livia/home/vision/Gbaldessin/.local/ollama/bin/ollama"
 OLLAMA_MODELS="/export/livia/home/vision/Gbaldessin/.ollama/models"
@@ -38,7 +38,7 @@ if screen -list 2>/dev/null | grep -q "\.$SESSION"; then
   exit 1
 fi
 
-mkdir -p "$SCRIPT_DIR/results"
+mkdir -p "$SCRIPT_DIR/03_outputs"
 
 # Start the GPU-enabled Ollama server if it is not already listening.
 if ! curl -sf http://localhost:11434/api/version > /dev/null 2>&1; then
@@ -61,8 +61,9 @@ else
 fi
 
 # Concatenate all cells into one runnable script.
-# Stored at the project root (not inside results/) so that __file__ resolves
-# to the correct PROJECT_DIR in Cell 1 and all relative paths stay valid.
+# Stored at the project root (not inside 03_outputs/) so that __file__
+# resolves to the correct PROJECT_DIR in Cell 1 and all relative paths stay
+# valid — the 01_frozen / 02_adjustable / 03_outputs subfolders hang off it.
 COMBINED="$SCRIPT_DIR/_run_all_cells.py"
 cat "$SCRIPT_DIR/Experiment Cell 1.py" \
     "$SCRIPT_DIR/Experiment Cell 2.py" \

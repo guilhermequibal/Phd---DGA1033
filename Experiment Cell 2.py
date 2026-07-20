@@ -21,7 +21,7 @@
 #    failures; a single hard crash would discard all prior results.
 # =============================================================
 import os
-import json, time, datetime, re
+import json, time, datetime, re, hashlib
 import requests
 import pandas as pd
 import fitz  # PyMuPDF
@@ -241,6 +241,38 @@ def call_ollama(system_prompt, user_message, timeout=None, max_retries=None):
         "attempts": max_retries + 1,
         "success": False,
     }
+
+
+# ---------- PROMPT VERSIONING ----------
+# Supports the two-layer prompt (01_frozen/prompt_domain.txt +
+# 02_adjustable/prompt_output_schema.txt, see CONFIG_POLICY.md). Each file's
+# first line carries a version comment
+# (e.g. "<!-- prompt_domain_version: 1.0 -->"); every run records the version
+# and SHA-256 hash of both files so results are traceable to an exact
+# instrument version and never silently compared across a prompt change.
+_VERSION_RE = re.compile(r"<!--\s*[\w_]*version:\s*(\S+?)\s*-->")
+
+
+def _sha256_file(path):
+    """Return the SHA-256 hex digest of a file's contents."""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        h.update(f.read())
+    return h.hexdigest()
+
+
+def read_versioned_prompt(path):
+    """Read a prompt file and extract its version from a leading version comment.
+
+    Returns (text, version, sha256). `version` is "unknown" if the file has
+    no `<!-- ..._version: X.Y -->` comment on its first line.
+    """
+    with open(path) as f:
+        text = f.read()
+    first_line = text.splitlines()[0] if text else ""
+    m = _VERSION_RE.search(first_line)
+    version = m.group(1) if m else "unknown"
+    return text, version, _sha256_file(path)
 
 
 # ---------- ENVISION DATA LOADER ----------

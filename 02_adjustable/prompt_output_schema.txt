@@ -1,0 +1,97 @@
+<!-- prompt_output_schema_version: 1.0 -->
+<!-- role: output format instructions only (JSON reporting schema: field names, structure, ordering). -->
+<!-- status: EDITABLE instrument — versioned per ../CONFIG_POLICY.md. A format change must never alter what is evaluated (that lives in prompt_domain.txt). -->
+
+## 6. Output Formats
+
+### 6.1 Phase 1 — Applicability Report *(produced first, always)*
+
+```json
+{
+  "project_summary": {
+    "project_name": "...",
+    "project_type": "...",
+    "project_phase": "Concept / Planning",
+    "project_boundary": "Elements within assessed scope",
+    "estimated_cost_usd": "...",
+    "verification_pathway_recommendation": "Pathway A or B with rationale"
+  },
+  "applicability_report": {
+    "credits_applicable": 0,
+    "credits_to_be_determined": 0,
+    "credits_not_applicable": 0,
+    "estimated_max_applicable_points": 1000,
+    "credit_determinations": [
+      {
+        "credit_id": "QL1.5",
+        "credit_name": "Minimize Light Pollution",
+        "max_points": 12,
+        "classification": "Not Applicable",
+        "indicator_tested": "Presence of exterior lighting",
+        "justification": "Model shows a fully buried utility with no exterior fixtures; manual deems the credit N/A when a project includes no exterior lighting.",
+        "na_reason_is_indicator_nonexistence": true,
+        "provenance": "Source: Manual!QL1.5 Applicability | Credit: QL1.5 | Role: APPLICABILITY"
+      }
+      // ... one entry for ALL 59 scored credits
+    ]
+  },
+  "phase_1_gate": "Applicability report complete. Awaiting confirmation / proceeding to Phase 2 for Applicable + TBD credits only."
+}
+```
+
+### 6.2 Phase 2 — Full Evaluation *(only after Phase 1)*
+
+```json
+{
+  "assessment_overview": {
+    "credits_evaluated": 0,
+    "credits_with_insufficient_data": 0,
+    "estimated_achievable_points": 0,
+    "estimated_max_applicable_points": 0,
+    "estimated_percentage": 0.0,
+    "projected_award_level": "None / Verified / Silver / Gold / Platinum",
+    "confidence_level": "Low / Medium / High (based on data completeness)"
+  },
+  "category_breakdown": [
+    { "category": "Quality of Life", "credits_evaluated": 13, "estimated_points": 0, "max_applicable_points": 200 }
+    // ... all 5 categories
+  ],
+  "credit_assessments": [
+    {
+      "credit_id": "QL1.1",
+      "credit_name": "Improve Community Quality of Life",
+      "max_points": 26,
+      "applicability": "Applicable",
+      "questions_evaluated": {
+        "A": { "status": "Likely Yes", "evidence": "...", "gap": null },
+        "B": { "status": "Insufficient Data", "evidence": null, "gap": "No community needs assessment in model" }
+      },
+      "estimated_level": "Enhanced",
+      "estimated_points": 5,
+      "level_guide_reference": "A + B + C + D required for Enhanced",
+      "concept_phase_actions": ["Begin community engagement to address A, B, D"],
+      "documentation_needed": ["Community needs assessment report", "Stakeholder engagement records"],
+      "pending_at_design_review": false
+    }
+    // ... one entry per Applicable/TBD credit
+  ],
+  "strategic_recommendations": {
+    "quick_wins": [],
+    "high_impact_credits": [],
+    "documentation_priorities": [],
+    "design_phase_targets": [],
+    "risk_areas": []
+  },
+  "recommended_next_steps": [
+    "Register project with ISI to lock in Envision v3",
+    "Confirm at least one ENV SP on the team",
+    "Establish baselines for reduction-based credits (RA2.1, RA3.2, CR1.1, CR1.2)"
+  ],
+  "sources": ["Manual!QL1.1 Evaluation Criteria | Credit: QL1.1 | Role: EVALUATION_CRITERIA"]
+}
+```
+
+### 6.3 Single-credit and scoring queries
+
+- **Single-credit:** return the credit's applicability determination first, then (if Applicable/TBD) its evaluation entry and sources.
+- **Scoring / award:** return `assessment_overview` + `category_breakdown` + sources, always reflecting the post-applicability denominator.

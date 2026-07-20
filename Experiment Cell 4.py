@@ -37,9 +37,37 @@ print(f" Files: {len(PDF_FILES)} PDF file(s)")
 print(f" Runs: {NUM_RUNS} per experiment")
 print("=" * 70)
 
-# Load the base prompt
-with open(SYSTEM_PROMPT_PATH) as f:
-    system_prompt = f.read()
+# Load the two-layer system prompt: frozen domain logic + versioned output
+# schema (see CONFIG_POLICY.md). Concatenating them here, rather than storing
+# one merged file, lets the output format be iterated on independently of the
+# evaluation logic while keeping both versions traceable per run.
+domain_text, domain_version, domain_sha256 = read_versioned_prompt(PROMPT_DOMAIN_PATH)
+schema_text, schema_version, schema_sha256 = read_versioned_prompt(PROMPT_OUTPUT_SCHEMA_PATH)
+system_prompt = domain_text + "\n\n" + schema_text
+
+print(f" Prompt domain:        v{domain_version} ({domain_sha256[:12]})")
+print(f" Prompt output schema: v{schema_version} ({schema_sha256[:12]})")
+
+# One manifest per experiment, recording every frozen/adjustable component's
+# version and hash so results are traceable and never compared across a
+# silent instrument change (see CONFIG_POLICY.md).
+experiment_manifest = {
+    "experiment_id": EXPERIMENT_ID,
+    "prompt_domain_version": domain_version,
+    "prompt_domain_sha256": domain_sha256,
+    "prompt_output_schema_version": schema_version,
+    "prompt_output_schema_sha256": schema_sha256,
+    "corpus_fingerprint": fingerprint,
+    "embedding_model": EMBEDDING_MODEL,
+    "chunk_size": CHUNK_SIZE,
+    "chunk_overlap": CHUNK_OVERLAP,
+    "top_k": RETRIEVAL_TOP_K,
+    "model": MODEL_NAME,
+    "temperature": TEMPERATURE,
+    "num_runs": NUM_RUNS,
+    "timestamp": timestamp(),
+}
+save_result(experiment_manifest, os.path.join(RESULTS_DIR, "experiment_manifest.json"))
 
 # Load the Envision categories
 categories, meta = load_envision_by_category()
@@ -122,6 +150,8 @@ your system instructions."""
         summary = {
             "experiment": "zero_shot", "file": file_label, "run": run_num,
             "model": MODEL_NAME, "temperature": TEMPERATURE,
+            "prompt_domain_version": domain_version,
+            "prompt_output_schema_version": schema_version,
             "total_elapsed_seconds": run_elapsed,
             "categories": {
                 k: {
@@ -240,6 +270,8 @@ credit_assessments format."""
         summary = {
             "experiment": "rag", "file": file_label, "run": run_num,
             "model": MODEL_NAME, "temperature": TEMPERATURE,
+            "prompt_domain_version": domain_version,
+            "prompt_output_schema_version": schema_version,
             "retrieval_top_k": RETRIEVAL_TOP_K, "embedding_model": EMBEDDING_MODEL,
             "index_sources": ["envision_workbook", "guidance_manual"],
             "total_elapsed_seconds": run_elapsed,
